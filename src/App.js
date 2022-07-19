@@ -11,10 +11,13 @@ import {
 } from "@mui/material";
 import RequestQuoteIcon from "@mui/icons-material/RequestQuote";
 import CustomCard from "./components/CustomCard";
+import StaticDrawer from "./components/StaticDrawer";
 
 export default function App() {
+
     return (
         <Box>
+            <StaticDrawer />
             <AppBar
                 position="static"
                 color="transparent"
