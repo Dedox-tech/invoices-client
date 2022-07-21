@@ -53,7 +53,7 @@ function AppBare() {
     };
 
     return (
-        <AppBar position="static" sx={{ backgroundColor: "black" }}>
+        <AppBar position="static" >
             <Container maxWidth="xl">
                 <Toolbar disableGutters>
                     <AssignmentIcon sx={{ display: { xs: 'none', md: 'flex' }, mr: 1 }} />
@@ -105,10 +105,9 @@ function AppBare() {
                             }}
                         >
                             <MenuItem onClick={handleCloseNavMenu}>
-                                <Typography textAlign="center">Home</Typography>
-                            </MenuItem>
-                            <MenuItem onClick={handleCloseNavMenu}>
-                                <Typography textAlign="center">Invoices</Typography>
+                                <Typography textAlign="center">
+                                    <LinkDom to="/invoices" style={{ color: 'black', textDecoration: 'none' }}>Invoices</LinkDom>
+                                </Typography>
                             </MenuItem>
                         </Menu>
                     </Box>
@@ -117,7 +116,7 @@ function AppBare() {
                         variant="h5"
                         noWrap
                         component="a"
-                        href=""
+                        href="/home"
                         sx={{
                             mr: 2,
                             display: { xs: 'flex', md: 'none' },
@@ -129,12 +128,9 @@ function AppBare() {
                             textDecoration: 'none',
                         }}
                     >
-                        LOGO
+                        App Facturas
                     </Typography>
                     <Box sx={{ flexGrow: 1, display: { xs: 'none', md: 'flex' } }}>
-                        <Button sx={{ my: 2, color: 'white', display: 'block' }}>
-                            <LinkDom to="/home" style={{ color: 'white', textDecoration: 'none' }}>Home</LinkDom>
-                        </Button>
                         <Button sx={{ my: 2, color: 'white', display: 'block' }}>
                             <LinkDom to="/invoices" style={{ color: 'white', textDecoration: 'none' }}>Invoices</LinkDom>
                         </Button>

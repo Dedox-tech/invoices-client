@@ -8,9 +8,9 @@ import "@fontsource/roboto/300.css";
 import "@fontsource/roboto/400.css";
 import "@fontsource/roboto/500.css";
 import "@fontsource/roboto/700.css";
-import Home from "./Pages/Home";
-import Invoces from "./Pages/Invoices";
-import Login from "./Pages/LogIn";
+import Home from "./pages/Home";
+import Invoces from "./pages/Invoices";
+import Login from "./pages/LogIn";
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
