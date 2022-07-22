@@ -1,0 +1,24 @@
+name: CI/CD Pipeline
+
+on:
+    push:
+        branches:
+            - master
+            - dev
+        pull_request:
+            branches: [master, dev]
+            types: [opened, synchronize]
+
+jobs:
+    build_and_deployment_pipeline:
+        runs-on: ubuntu-latest
+        steps:
+            - name: Pasarnos al repo
+                uses: actions/checkout@v3
+            - name: Configurar node
+                uses: actions/setup-node@v2
+                with: 
+                    node-version: "16"
+            - name: Instalar dependencias
+                run: npm install
+                
