@@ -11,50 +11,36 @@ import "@fontsource/roboto/300.css";
 import "@fontsource/roboto/400.css";
 import "@fontsource/roboto/500.css";
 import "@fontsource/roboto/700.css";
+import colorPalette from "./utils/supertokens/styles/colorPalette";
+import containerStyles from "./utils/supertokens/styles/containerStyles";
+import generalConfiguration from "./utils/supertokens/configurations/generalConfiguration";
+import headerStyles from "./utils/supertokens/styles/headerStyles";
+import {
+    dividerStyles,
+    inputWrapperStyles,
+    passwordLinkStyles,
+} from "./utils/supertokens/styles/otherStyles";
+import signUpFormFields from "./utils/supertokens/configurations/signUpFormFields";
+import translationsEs from "./utils/supertokens/configurations/translationsEs";
 
 SuperTokens.init({
-    appInfo: {
-        appName: "invoices-app",
-        apiDomain: "http://localhost:5000",
-        websiteDomain: "http://localhost:3000",
-        apiBasePath: "/api-auth",
-        websiteBasePath: "/auth",
+    languageTranslations: {
+        translations: translationsEs,
     },
+    appInfo: generalConfiguration,
     recipeList: [
         EmailPassword.init({
-            palette: {
-                background: "#FFFFFF",
-                primary: "#1976d2",
-                inputBackground: "#FFFFFF",
-                error: "#d32f2f",
-                success: "#2e7d32",
-                textTitle: "#000000",
-                textLabel: "#666666",
-                textInput: "#212121",
-                textLink: "#0072e5",
-                buttonText: "#FFFFFF",
-                superTokensBrandingBackground: "#FFFFFF",
-                superTokensBrandingText: "#00000099",
-            },
+            palette: colorPalette,
             style: {
-                container: {
-                    fontFamily: "Roboto",
-                    "@media (min-width: 600px)": {
-                        marginTop: "5rem",
-                    },
-                    boxShadow: "none",
-                },
-                headerTitle: {
-                    lineHeight: "1.235",
-                    fontWeight: "400",
-                    fontSize: "2.125rem",
-                    marginBottom: "10px",
-                },
-                divider: {
-                    display: "none",
-                },
-                inputWrapper: {
-                    height: "3.2rem",
+                container: containerStyles,
+                headerTitle: headerStyles,
+                divider: dividerStyles,
+                inputWrapper: inputWrapperStyles,
+                forgotPasswordLink: passwordLinkStyles,
+            },
+            signInAndUpFeature: {
+                signUpForm: {
+                    formFields: signUpFormFields,
                 },
             },
         }),
