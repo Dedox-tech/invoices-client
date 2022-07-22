@@ -16,7 +16,7 @@ SuperTokens.init({
     appInfo: {
         appName: "invoices-app",
         apiDomain: "http://localhost:5000",
-        websiteDomain: "https://invoice-app-top-gun-lab.netlify.app",
+        websiteDomain: "http://localhost:3000",
         apiBasePath: "/api-auth",
         websiteBasePath: "/auth",
     },
@@ -24,7 +24,38 @@ SuperTokens.init({
         EmailPassword.init({
             palette: {
                 background: "#FFFFFF",
-                primary: "#4976d2",
+                primary: "#1976d2",
+                inputBackground: "#FFFFFF",
+                error: "#d32f2f",
+                success: "#2e7d32",
+                textTitle: "#000000",
+                textLabel: "#666666",
+                textInput: "#212121",
+                textLink: "#0072e5",
+                buttonText: "#FFFFFF",
+                superTokensBrandingBackground: "#FFFFFF",
+                superTokensBrandingText: "#00000099",
+            },
+            style: {
+                container: {
+                    fontFamily: "Roboto",
+                    "@media (min-width: 600px)": {
+                        marginTop: "5rem",
+                    },
+                    boxShadow: "none",
+                },
+                headerTitle: {
+                    lineHeight: "1.235",
+                    fontWeight: "400",
+                    fontSize: "2.125rem",
+                    marginBottom: "10px",
+                },
+                divider: {
+                    display: "none",
+                },
+                inputWrapper: {
+                    height: "3.2rem",
+                },
             },
         }),
         Session.init(),
