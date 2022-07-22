@@ -1,10 +1,19 @@
 import React from "react";
-import { Box, Container, Typography } from "@mui/material";
+import { Box, Container, Typography, Button } from "@mui/material";
+import { signOut } from "supertokens-auth-react/recipe/emailpassword";
+import { useNavigate } from "react-router-dom";
 import CustomCard from "./CustomCard";
 import CustomAppBar from "./CustomAppBar";
 import CustomForm from "./CustomForm";
 
 export default function MaterialExample() {
+    const navigate = useNavigate();
+
+    const handleLogout = async () => {
+        await signOut();
+        navigate("/auth");
+    };
+
     return (
         <Box>
             <CustomAppBar />
@@ -21,6 +30,15 @@ export default function MaterialExample() {
                     Formulario
                 </Typography>
                 <CustomForm />
+                <Button
+                    variant="contained"
+                    color="secondary"
+                    fullWidth
+                    sx={{ mt: 5 }}
+                    onClick={handleLogout}
+                >
+                    Logout
+                </Button>
                 <Typography
                     variant="h5"
                     color="initial"
