@@ -1,0 +1,38 @@
+name: CI/CD Pipeline
+
+on:
+    push:
+        branches:
+            - master
+            - dev
+        pull_request:
+            branches: [master, dev]
+            types: [opened, synchronize]
+
+jobs:
+    build_and_deployment_pipeline:
+        runs-on: ubuntu-latest
+        steps:
+            - name: Pasarnos al repo
+              uses: actions/checkout@v3
+            - name: Configurar node
+              uses: actions/setup-node@v2
+              with:
+                  node-version: "16"
+            - name: Instalar dependencias
+              run: npm install
+            - name: Correr el Linter
+              run: npm run eslint
+            - name: Correr Prettier
+              run: npm run prettier
+            - name: Correr el build
+              run: npm run build
+            - name: Realizar deployment a Netlify
+              uses: nwtgck/actions-netlify@v1.2
+              with:
+                  publish-dir: "./build"
+                  production-branch: master
+                  deploy-message: "Sitio desplegado con GitHub Actions"
+              env:
+                  NETLIFY_AUTH_TOKEN: ${{ secrets.NETLIFY_AUTH_TOKEN }}
+                  NETLIFY_SITE_ID: ${{ secrets.NETLIFY_SITE_ID }}
