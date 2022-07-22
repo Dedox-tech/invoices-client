@@ -20,7 +20,15 @@ SuperTokens.init({
         apiBasePath: "/api-auth",
         websiteBasePath: "/auth",
     },
-    recipeList: [EmailPassword.init(), Session.init()],
+    recipeList: [
+        EmailPassword.init({
+            palette: {
+                background: "#FFFFFF",
+                primary: "#4976d2",
+            },
+        }),
+        Session.init(),
+    ],
 });
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
