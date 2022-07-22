@@ -16,7 +16,7 @@ SuperTokens.init({
     appInfo: {
         appName: "invoices-app",
         apiDomain: "http://localhost:5000",
-        websiteDomain: "http://localhost:3000",
+        websiteDomain: "https://invoice-app-top-gun-lab.netlify.app",
         apiBasePath: "/api-auth",
         websiteBasePath: "/auth",
     },

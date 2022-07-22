@@ -25,3 +25,14 @@ jobs:
               run: npm run eslint
             - name: Correr Prettier
               run: npm run prettier
+            - name: Correr el build
+              run: npm run build
+            - name: Realizar deployment a Netlify
+              uses: nwtgck/actions-netlify@v1.2
+              with:
+                  publish-dir: "./build"
+                  production-branch: master
+                  deploy-message: "Sitio desplegado con GitHub Actions"
+              env:
+                  NETLIFY_AUTH_TOKEN: ${{ secrets.NETLIFY_AUTH_TOKEN }}
+                  NETLIFY_SITE_ID: ${{ secrets.NETLIFY_SITE_ID }}
