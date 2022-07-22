@@ -14,11 +14,10 @@ jobs:
         runs-on: ubuntu-latest
         steps:
             - name: Pasarnos al repo
-                uses: actions/checkout@v3
+              uses: actions/checkout@v3
             - name: Configurar node
-                uses: actions/setup-node@v2
-                with: 
-                    node-version: "16"
+              uses: actions/setup-node@v2
+              with:
+                  node-version: "16"
             - name: Instalar dependencias
-                run: npm install
-                
+              run: npm install
