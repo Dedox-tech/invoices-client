@@ -12,14 +12,15 @@ import "@fontsource/roboto/400.css";
 import "@fontsource/roboto/500.css";
 import "@fontsource/roboto/700.css";
 import colorPalette from "./utils/supertokens/styles/colorPalette";
-import containerStyles from "./utils/supertokens/styles/containerStyles";
 import generalConfiguration from "./utils/supertokens/configurations/generalConfiguration";
-import headerStyles from "./utils/supertokens/styles/headerStyles";
 import {
+    containerStyles,
+    headerStyles,
     dividerStyles,
     inputWrapperStyles,
     passwordLinkStyles,
-} from "./utils/supertokens/styles/otherStyles";
+    buttonStyles,
+} from "./utils/supertokens/styles/formStyles";
 import signUpFormFields from "./utils/supertokens/configurations/signUpFormFields";
 import translationsEs from "./utils/supertokens/configurations/translationsEs";
 
@@ -37,6 +38,7 @@ SuperTokens.init({
                 divider: dividerStyles,
                 inputWrapper: inputWrapperStyles,
                 forgotPasswordLink: passwordLinkStyles,
+                button: buttonStyles,
             },
             signInAndUpFeature: {
                 signUpForm: {
