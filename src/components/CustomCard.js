@@ -1,6 +1,13 @@
 import React from "react";
 import Typography from "@mui/material/Typography";
-import { Button, Card, CardContent, CardActions, Stack, Slider } from "@mui/material";
+import {
+    Button,
+    Card,
+    CardContent,
+    CardActions,
+    Stack,
+    Slider,
+} from "@mui/material";
 
 export default function CustomCard() {
     return (
