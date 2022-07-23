@@ -1,0 +1,86 @@
+img {
+    width: 100%;
+    height: 100%;
+}
+
+main h2 {
+    font-size: 48px;
+    color: #333;
+}
+
+main p {
+    font-size: 20px;
+    font-weight: 400; 
+    color: #777;
+}
+
+main .MuiButton-root {
+    display: flex;
+    justify-content: space-between;
+    padding: 15px; 
+    width: 130px;
+    border-radius: 20px;
+    transition: width .3s linear .1s;
+}
+
+main .MuiButton-root:hover {
+    width: 140px;
+}
+
+main .MuiButton-root svg {
+    font-size: 30px;
+}
+
+@keyframes image {
+    from {transform: translateY(-5px);}
+    to {transform: translateY(5px);}
+}
+
+main .phone-home {
+    max-width: 500px;
+    position: absolute; 
+    z-index:  100; 
+    top: 50px;
+    animation: image 1s linear .5s infinite alternate;
+}
+
+@keyframes pie {
+    from {transform: rotate(0deg);}
+    to {transform: rotate(360deg);}
+}
+
+main .pie-chart-home {
+    max-width: 150px;
+    position: absolute;
+    z-index: 50;
+    left: 50px;
+    animation: pie 10s linear .5s infinite 
+}
+
+@keyframes arrow {
+    from {
+        transform: scale(.9);
+    }
+
+    to {
+        transform: scale(1);;
+    }
+}
+
+main .arrow-home {
+    max-width: 150px;
+    position: absolute;
+    z-index: 50;
+    bottom: 20px;
+    right: 50px;
+    animation: arrow 2s linear 0s infinite alternate
+}
+
+main .squares-home {
+    max-width: 150px;
+    position: absolute;
+    z-index: 50;
+    right: 50px;
+    /* animation: pie 5s linear .5s infinite */
+}
+
