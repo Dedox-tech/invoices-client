@@ -3,17 +3,19 @@ import { Routes, Route } from "react-router-dom";
 import * as reactRouterDom from "react-router-dom";
 import { getSuperTokensRoutesForReactRouterDom } from "supertokens-auth-react";
 import EmailPassword from "supertokens-auth-react/recipe/emailpassword";
-import MaterialExample from "./components/MaterialExample";
+import Home from "./pages/Home";
+import Invoices from "./pages/Invoices";
 
 export default function App() {
     return (
         <Routes>
             {getSuperTokensRoutesForReactRouterDom(reactRouterDom)}
+            <Route path="/" element={<Home />} />
             <Route
-                path="/"
+                path="/invoices"
                 element={
                     <EmailPassword.EmailPasswordAuth>
-                        <MaterialExample />
+                        <Invoices />
                     </EmailPassword.EmailPasswordAuth>
                 }
             />
@@ -21,7 +23,7 @@ export default function App() {
                 path="*"
                 element={
                     <EmailPassword.EmailPasswordAuth>
-                        <MaterialExample />
+                        <Invoices />
                     </EmailPassword.EmailPasswordAuth>
                 }
             />
