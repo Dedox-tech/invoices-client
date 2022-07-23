@@ -2,53 +2,16 @@ import React from "react";
 import ReactDOM from "react-dom/client";
 import "./index.css";
 import SuperTokens, { SuperTokensWrapper } from "supertokens-auth-react";
-import Session from "supertokens-auth-react/recipe/session";
-import EmailPassword from "supertokens-auth-react/recipe/emailpassword";
 import { BrowserRouter } from "react-router-dom";
 import App from "./App";
+import generalConfiguration from "./utils/supertokens/configurations/generalConfiguration";
 import reportWebVitals from "./reportWebVitals";
 import "@fontsource/roboto/300.css";
 import "@fontsource/roboto/400.css";
 import "@fontsource/roboto/500.css";
 import "@fontsource/roboto/700.css";
-import colorPalette from "./utils/supertokens/styles/colorPalette";
-import generalConfiguration from "./utils/supertokens/configurations/generalConfiguration";
-import {
-    containerStyles,
-    headerStyles,
-    dividerStyles,
-    inputWrapperStyles,
-    passwordLinkStyles,
-    buttonStyles,
-} from "./utils/supertokens/styles/formStyles";
-import signUpFormFields from "./utils/supertokens/configurations/signUpFormFields";
-import translationsEs from "./utils/supertokens/configurations/translationsEs";
 
-SuperTokens.init({
-    languageTranslations: {
-        translations: translationsEs,
-    },
-    appInfo: generalConfiguration,
-    recipeList: [
-        EmailPassword.init({
-            palette: colorPalette,
-            style: {
-                container: containerStyles,
-                headerTitle: headerStyles,
-                divider: dividerStyles,
-                inputWrapper: inputWrapperStyles,
-                forgotPasswordLink: passwordLinkStyles,
-                button: buttonStyles,
-            },
-            signInAndUpFeature: {
-                signUpForm: {
-                    formFields: signUpFormFields,
-                },
-            },
-        }),
-        Session.init(),
-    ],
-});
+SuperTokens.init(generalConfiguration);
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
