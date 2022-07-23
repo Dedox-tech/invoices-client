@@ -3,8 +3,8 @@ import { Routes, Route } from "react-router-dom";
 import * as reactRouterDom from "react-router-dom";
 import { getSuperTokensRoutesForReactRouterDom } from "supertokens-auth-react";
 import EmailPassword from "supertokens-auth-react/recipe/emailpassword";
-import Invoices from "./pages/Invoices";
 import Home from "./pages/Home";
+import Invoices from "./pages/Invoices";
 
 export default function App() {
     return (
