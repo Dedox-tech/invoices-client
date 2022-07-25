@@ -2,7 +2,7 @@ import React from "react";
 import { Typography, Stack } from "@mui/material";
 import PropTypes from "prop-types";
 import CheckCircleOutlineIcon from "@mui/icons-material/CheckCircleOutline";
-import WarningAmberIcon from "@mui/icons-material/WarningAmber";
+import ErrorOutlineIcon from "@mui/icons-material/ErrorOutline";
 
 function InvoiceStatus({ isPaid }) {
     if (isPaid === "pagada") {
@@ -29,9 +29,9 @@ function InvoiceStatus({ isPaid }) {
             direction="row"
             alignItems="center"
             justifyContent="center"
-            spacing={0.25}
+            spacing={0.3}
         >
-            <WarningAmberIcon color="error" />
+            <ErrorOutlineIcon color="error" />
             <Typography
                 variant="body1"
                 color="error.main"
