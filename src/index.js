@@ -3,6 +3,7 @@ import ReactDOM from "react-dom/client";
 import "./index.css";
 import SuperTokens, { SuperTokensWrapper } from "supertokens-auth-react";
 import { BrowserRouter } from "react-router-dom";
+import { CssBaseline } from "@mui/material";
 import App from "./App";
 import generalConfiguration from "./utils/supertokens/configurations/generalConfiguration";
 import reportWebVitals from "./reportWebVitals";
@@ -18,6 +19,7 @@ root.render(
     <React.StrictMode>
         <SuperTokensWrapper>
             <BrowserRouter>
+                <CssBaseline />
                 <App />
             </BrowserRouter>
         </SuperTokensWrapper>

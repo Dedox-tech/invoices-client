@@ -13,28 +13,28 @@ export default function InvoiceList() {
                 alignItems="center"
                 alignContent="center"
             >
-                <Grid item lg={3} md={4} sm={6} xs={12}>
+                <Grid item lg={2.95} md={3.8} sm={5.6} xs={10}>
                     <InvoiceCard />
                 </Grid>
-                <Grid item lg={3} md={4} sm={6} xs={12}>
+                <Grid item lg={2.95} md={3.8} sm={5.6} xs={10}>
                     <InvoiceCard />
                 </Grid>
-                <Grid item lg={3} md={4} sm={6} xs={12}>
+                <Grid item lg={2.95} md={3.8} sm={5.6} xs={10}>
                     <InvoiceCard />
                 </Grid>
-                <Grid item lg={3} md={4} sm={6} xs={12}>
+                <Grid item lg={2.95} md={3.8} sm={5.6} xs={10}>
                     <InvoiceCard />
                 </Grid>
-                <Grid item lg={3} md={4} sm={6} xs={12}>
+                <Grid item lg={2.95} md={3.8} sm={5.6} xs={10}>
                     <InvoiceCard />
                 </Grid>
-                <Grid item lg={3} md={4} sm={6} xs={12}>
+                <Grid item lg={2.95} md={3.8} sm={5.6} xs={10}>
                     <InvoiceCard />
                 </Grid>
-                <Grid item lg={3} md={4} sm={6} xs={12}>
+                <Grid item lg={2.95} md={3.8} sm={5.6} xs={10}>
                     <InvoiceCard />
                 </Grid>
-                <Grid item lg={3} md={4} sm={6} xs={12}>
+                <Grid item lg={2.95} md={3.8} sm={5.6} xs={10}>
                     <InvoiceCard />
                 </Grid>
             </Grid>
