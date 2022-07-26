@@ -65,7 +65,7 @@ function AppBare() {
     };
 
     return (
-        <AppBar position="static" variant="outlined">
+        <AppBar position="static" variant="outlined" elevation={0}>
             <Container maxWidth="xl">
                 <Toolbar disableGutters>
                     <AssignmentIcon

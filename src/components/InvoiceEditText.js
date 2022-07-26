@@ -1,11 +1,11 @@
 import React from "react";
-import { Container, Typography } from "@mui/material";
+import { Container, Typography, Box } from "@mui/material";
 import { grey } from "@mui/material/colors";
 import InvoiceStatus from "./InvoiceStatus";
 
 export default function InvoiceEditText() {
     return (
-        <Container maxWidth="sm" sx={{ mt: 7, mb: 5, px: 5 }}>
+        <Container maxWidth="sm" sx={{ mt: 5, mb: 5, px: 5 }}>
             <Typography variant="subtitle1" color={grey[500]} sx={{ mb: 0.25 }}>
                 Categoria
             </Typography>
@@ -86,9 +86,9 @@ export default function InvoiceEditText() {
             <Typography variant="body1" color={grey[500]} sx={{ mb: 0.25 }}>
                 Estado
             </Typography>
-            <Typography paragraph sx={{ mb: 3 }}>
+            <Box sx={{ mb: 3 }}>
                 <InvoiceStatus paidStatus="pendiente" />
-            </Typography>
+            </Box>
         </Container>
     );
 }
