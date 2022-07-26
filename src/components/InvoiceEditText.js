@@ -5,7 +5,7 @@ import InvoiceStatus from "./InvoiceStatus";
 
 export default function InvoiceEditText() {
     return (
-        <Container maxWidth="sm" sx={{ mt: 5, mb: 5, px: 5 }}>
+        <Container maxWidth="sm" sx={{ mt: 7, mb: 5, px: 5 }}>
             <Typography variant="subtitle1" color={grey[500]} sx={{ mb: 0.25 }}>
                 Categoria
             </Typography>

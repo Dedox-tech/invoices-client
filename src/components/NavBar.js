@@ -1,8 +1,8 @@
+import React from "react";
 import {
     AppBar,
     Avatar,
     Box,
-    Button,
     Container,
     IconButton,
     Menu,
@@ -13,39 +13,16 @@ import {
 } from "@mui/material";
 import AssignmentIcon from "@mui/icons-material/Assignment";
 import MenuIcon from "@mui/icons-material/Menu";
-import React from "react";
 import { Link as LinkDom } from "react-router-dom";
 
 export default function NavBar() {
-    return (
-        /*  <AppBar position="static">
-             <div>Barra Navegación</div>
-             <Toolbar>
-                 <Menu>
-                     <MenuItem>
-                         Producto
-                     </MenuItem>
-                 </Menu>
- 
- 
-             </Toolbar>
-             <ul>
-                 <li>
-                     <LinkDom to="/home">Home</LinkDom>
-                 </li>
-                 <li>
-                     <LinkDom to="/invoices">Facturas</LinkDom>
-                 </li>
-             </ul>
-         </AppBar> */
-        <AppBare />
-    );
+    return <InvoicesAppBar />;
 }
 
 // const pages = ['Products', 'Pricing', 'Blog'];
 const settings = ["Profile", "Account", "Dashboard", "Logout"];
 
-function AppBare() {
+function InvoicesAppBar() {
     const [anchorElNav, setAnchorElNav] = React.useState(null);
     const [anchorElUser, setAnchorElUser] = React.useState(null);
 
@@ -81,12 +58,11 @@ function AppBare() {
                             display: { xs: "none", md: "flex" },
                             fontFamily: "monospace",
                             fontWeight: 700,
-                            letterSpacing: ".3rem",
                             color: "inherit",
                             textDecoration: "none",
                         }}
                     >
-                        App Facturas
+                        Facturas
                     </Typography>
 
                     <Box
@@ -132,7 +108,20 @@ function AppBare() {
                                             textDecoration: "none",
                                         }}
                                     >
-                                        Invoices
+                                        Dashboard
+                                    </LinkDom>
+                                </Typography>
+                            </MenuItem>
+                            <MenuItem onClick={handleCloseNavMenu}>
+                                <Typography textAlign="center">
+                                    <LinkDom
+                                        to="/invoices"
+                                        style={{
+                                            color: "black",
+                                            textDecoration: "none",
+                                        }}
+                                    >
+                                        Añadir
                                     </LinkDom>
                                 </Typography>
                             </MenuItem>
@@ -157,7 +146,7 @@ function AppBare() {
                             textDecoration: "none",
                         }}
                     >
-                        App Facturas
+                        Facturas
                     </Typography>
                     <Box
                         sx={{
@@ -165,8 +154,8 @@ function AppBare() {
                             display: { xs: "none", md: "flex" },
                         }}
                     >
-                        <Button
-                            sx={{ my: 2, color: "white", display: "block" }}
+                        <Typography
+                            sx={{ color: "white", display: "block", mr: 2 }}
                         >
                             <LinkDom
                                 to="/invoices"
@@ -175,9 +164,20 @@ function AppBare() {
                                     textDecoration: "none",
                                 }}
                             >
-                                Invoices
+                                Dashboard
                             </LinkDom>
-                        </Button>
+                        </Typography>
+                        <Typography sx={{ color: "white", display: "block" }}>
+                            <LinkDom
+                                to="/invoices"
+                                style={{
+                                    color: "white",
+                                    textDecoration: "none",
+                                }}
+                            >
+                                Añadir
+                            </LinkDom>
+                        </Typography>
                     </Box>
 
                     <Box sx={{ flexGrow: 0 }}>
