@@ -4,13 +4,13 @@ import PropTypes from "prop-types";
 import CheckCircleOutlineIcon from "@mui/icons-material/CheckCircleOutline";
 import ErrorOutlineIcon from "@mui/icons-material/ErrorOutline";
 
-function InvoiceStatus({ isPaid }) {
-    if (isPaid === "pagada") {
+function InvoiceStatus({ paidStatus }) {
+    if (paidStatus === "pagada") {
         return (
             <Stack
                 direction="row"
                 alignItems="center"
-                justifyContent="center"
+                justifyContent="left"
                 spacing={0.25}
             >
                 <CheckCircleOutlineIcon color="success" />
@@ -28,7 +28,7 @@ function InvoiceStatus({ isPaid }) {
         <Stack
             direction="row"
             alignItems="center"
-            justifyContent="center"
+            justifyContent="left"
             spacing={0.3}
         >
             <ErrorOutlineIcon color="error" />
@@ -44,7 +44,7 @@ function InvoiceStatus({ isPaid }) {
 }
 
 InvoiceStatus.propTypes = {
-    isPaid: PropTypes.string.isRequired,
+    paidStatus: PropTypes.string.isRequired,
 };
 
 export default InvoiceStatus;
