@@ -7,9 +7,15 @@ import {
     Typography,
     Stack,
 } from "@mui/material";
+import { useNavigate } from "react-router-dom";
 import InvoiceStatus from "./InvoiceStatus";
 
 export default function InvoiceCard() {
+    const navigate = useNavigate();
+    const handleClickDetails = async () => {
+        navigate("/details-invoices");
+    };
+
     return (
         <Card variant="outlined">
             <CardContent>
@@ -33,11 +39,15 @@ export default function InvoiceCard() {
                 </Typography>
             </CardContent>
             <CardActions>
-                <Button variant="text" color="primary">
-                    Editar
+                <Button
+                    variant="text"
+                    color="primary"
+                    onClick={handleClickDetails}
+                >
+                    Ver detalles
                 </Button>
                 <Button variant="text" color="primary">
-                    Ver detalles
+                    Eliminar
                 </Button>
             </CardActions>
         </Card>

@@ -9,8 +9,8 @@ export default function FloatingButtonAdd() {
             aria-label="add"
             sx={{
                 position: "fixed",
-                bottom: (theme) => theme.spacing(3),
-                right: (theme) => theme.spacing(3),
+                bottom: (theme) => theme.spacing(2),
+                right: (theme) => theme.spacing(2),
             }}
         >
             <AddIcon />

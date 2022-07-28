@@ -20,7 +20,7 @@ export default function NavBar() {
 }
 
 // const pages = ['Products', 'Pricing', 'Blog'];
-const settings = ["Profile", "Account", "Dashboard", "Logout"];
+const settings = ["Iniciar sesión"];
 
 function InvoicesAppBar() {
     const [anchorElNav, setAnchorElNav] = React.useState(null);

@@ -9,8 +9,8 @@ export default function FloatingButtonEdit() {
             aria-label="edit"
             sx={{
                 position: "fixed",
-                bottom: (theme) => theme.spacing(3),
-                right: (theme) => theme.spacing(3),
+                bottom: (theme) => theme.spacing(2),
+                right: (theme) => theme.spacing(2),
             }}
         >
             <EditIcon />
