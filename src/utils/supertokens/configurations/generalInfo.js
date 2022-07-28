@@ -1,7 +1,7 @@
 const generalInfo = {
     appName: "invoices-app",
     apiDomain: "http://localhost:5000",
-    websiteDomain: "https://invoice-app-top-gun-lab.netlify.app",
+    websiteDomain: "http://localhost:3000",
     apiBasePath: "/api-auth",
     websiteBasePath: "/auth",
 };

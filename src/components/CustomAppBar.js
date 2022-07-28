@@ -7,7 +7,7 @@ export default function CustomAppBar() {
         <AppBar
             position="static"
             color="transparent"
-            elevation={1}
+            elevation={0}
             variant="outlined"
         >
             <Toolbar>
