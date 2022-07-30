@@ -6,6 +6,7 @@ import EmailPassword from "supertokens-auth-react/recipe/emailpassword";
 import Home from "./pages/Home";
 import Invoices from "./pages/Invoices";
 import EditInvoice from "./pages/EditInvoice";
+import AddInvoice from "./pages/AddInvoice";
 
 export default function App() {
     return (
@@ -29,6 +30,7 @@ export default function App() {
                     </EmailPassword.EmailPasswordAuth>
                 }
             />
+            <Route path="/add-invoice" element={<AddInvoice />} />
             <Route
                 path="*"
                 element={

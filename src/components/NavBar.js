@@ -14,17 +14,18 @@ import {
 import AssignmentIcon from "@mui/icons-material/Assignment";
 import MenuIcon from "@mui/icons-material/Menu";
 import { Link as LinkDom } from "react-router-dom";
+import { useSessionContext } from "supertokens-auth-react/recipe/session";
 
 export default function NavBar() {
     return <InvoicesAppBar />;
 }
 
-// const pages = ['Products', 'Pricing', 'Blog'];
-const settings = ["Iniciar sesión"];
-
 function InvoicesAppBar() {
     const [anchorElNav, setAnchorElNav] = React.useState(null);
     const [anchorElUser, setAnchorElUser] = React.useState(null);
+
+    const session = useSessionContext;
+    const { doesSessionExist } = session;
 
     const handleOpenNavMenu = (event) => {
         setAnchorElNav(event.currentTarget);
@@ -32,11 +33,9 @@ function InvoicesAppBar() {
     const handleOpenUserMenu = (event) => {
         setAnchorElUser(event.currentTarget);
     };
-
     const handleCloseNavMenu = () => {
         setAnchorElNav(null);
     };
-
     const handleCloseUserMenu = () => {
         setAnchorElUser(null);
     };
@@ -186,10 +185,7 @@ function InvoicesAppBar() {
                                 onClick={handleOpenUserMenu}
                                 sx={{ p: 0 }}
                             >
-                                <Avatar
-                                    alt="Remy Sharp"
-                                    src="/static/images/avatar/2.jpg"
-                                />
+                                <Avatar>R</Avatar>
                             </IconButton>
                         </Tooltip>
                         <Menu
@@ -208,16 +204,19 @@ function InvoicesAppBar() {
                             open={Boolean(anchorElUser)}
                             onClose={handleCloseUserMenu}
                         >
-                            {settings.map((setting) => (
-                                <MenuItem
-                                    key={setting}
-                                    onClick={handleCloseUserMenu}
-                                >
+                            {doesSessionExist ? (
+                                <MenuItem onClick={handleCloseUserMenu}>
                                     <Typography textAlign="center">
-                                        {setting}
+                                        Cerrar sesión
                                     </Typography>
                                 </MenuItem>
-                            ))}
+                            ) : (
+                                <MenuItem onClick={handleCloseUserMenu}>
+                                    <Typography textAlign="center">
+                                        Iniciar sesión
+                                    </Typography>
+                                </MenuItem>
+                            )}
                         </Menu>
                     </Box>
                 </Toolbar>
