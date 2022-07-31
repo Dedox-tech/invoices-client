@@ -1,3 +1,4 @@
+/* eslint-disable no-console */
 import React from "react";
 import {
     AppBar,
@@ -16,6 +17,7 @@ import MenuIcon from "@mui/icons-material/Menu";
 import { Link as LinkDom, useNavigate } from "react-router-dom";
 import { useSessionContext } from "supertokens-auth-react/recipe/session";
 import { signOut } from "supertokens-auth-react/recipe/emailpassword";
+import useGetUserInfo from "../utils/data fetching/useGetUserInfo";
 
 export default function NavBar() {
     const [anchorElNav, setAnchorElNav] = React.useState(null);
@@ -23,6 +25,8 @@ export default function NavBar() {
 
     const session = useSessionContext();
     const { doesSessionExist } = session;
+
+    const { data } = useGetUserInfo();
 
     const navigate = useNavigate();
 
@@ -40,11 +44,15 @@ export default function NavBar() {
     };
 
     const handleLogOut = async () => {
+        handleCloseUserMenu();
+        handleCloseNavMenu();
         await signOut();
         navigate("/");
     };
 
     const handleSignIn = () => {
+        handleCloseUserMenu();
+        handleCloseNavMenu();
         navigate("/auth");
     };
 
@@ -193,8 +201,12 @@ export default function NavBar() {
                                 onClick={handleOpenUserMenu}
                                 sx={{ p: 0 }}
                             >
-                                {doesSessionExist ? (
-                                    <Avatar>U</Avatar>
+                                {doesSessionExist && data ? (
+                                    <Avatar>
+                                        {data.userCompleteInfo[0].nombre.charAt(
+                                            0
+                                        )}
+                                    </Avatar>
                                 ) : (
                                     <Avatar>G</Avatar>
                                 )}
