@@ -1,5 +1,7 @@
+/* eslint-disable no-console */
 import React from "react";
 import { Box, Button, Container, Grid, Typography } from "@mui/material";
+import { useSessionContext } from "supertokens-auth-react/recipe/session";
 import { useNavigate } from "react-router-dom";
 import ArrowRightAltIcon from "@mui/icons-material/ArrowRightAlt";
 import Image from "mui-image";
@@ -7,10 +9,18 @@ import Phone from "../images/Phone.svg";
 import NavBar from "../components/NavBar";
 
 export default function Home() {
+    const session = useSessionContext();
+    const { doesSessionExist } = session;
+
     const navigate = useNavigate();
 
-    const handleClick = async () => {
-        navigate("/auth");
+    const handleClick = () => {
+        console.log("La sesion existe", doesSessionExist);
+        if (doesSessionExist) {
+            navigate("/invoices");
+        } else {
+            navigate("/auth");
+        }
     };
 
     return (

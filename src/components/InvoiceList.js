@@ -4,7 +4,7 @@ import InvoiceCard from "./InvoiceCard";
 
 export default function InvoiceList() {
     return (
-        <Container maxWidth="lg" sx={{ mt: 7 }}>
+        <Container maxWidth="lg" sx={{ mt: 7, mb: 10 }}>
             <Grid
                 container
                 spacing={5}

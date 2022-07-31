@@ -13,19 +13,18 @@ import {
 } from "@mui/material";
 import AssignmentIcon from "@mui/icons-material/Assignment";
 import MenuIcon from "@mui/icons-material/Menu";
-import { Link as LinkDom } from "react-router-dom";
+import { Link as LinkDom, useNavigate } from "react-router-dom";
 import { useSessionContext } from "supertokens-auth-react/recipe/session";
+import { signOut } from "supertokens-auth-react/recipe/emailpassword";
 
 export default function NavBar() {
-    return <InvoicesAppBar />;
-}
-
-function InvoicesAppBar() {
     const [anchorElNav, setAnchorElNav] = React.useState(null);
     const [anchorElUser, setAnchorElUser] = React.useState(null);
 
-    const session = useSessionContext;
+    const session = useSessionContext();
     const { doesSessionExist } = session;
+
+    const navigate = useNavigate();
 
     const handleOpenNavMenu = (event) => {
         setAnchorElNav(event.currentTarget);
@@ -38,6 +37,15 @@ function InvoicesAppBar() {
     };
     const handleCloseUserMenu = () => {
         setAnchorElUser(null);
+    };
+
+    const handleLogOut = async () => {
+        await signOut();
+        navigate("/");
+    };
+
+    const handleSignIn = () => {
+        navigate("/auth");
     };
 
     return (
@@ -114,7 +122,7 @@ function InvoicesAppBar() {
                             <MenuItem onClick={handleCloseNavMenu}>
                                 <Typography textAlign="center">
                                     <LinkDom
-                                        to="/invoices"
+                                        to="/add-invoice"
                                         style={{
                                             color: "black",
                                             textDecoration: "none",
@@ -168,7 +176,7 @@ function InvoicesAppBar() {
                         </Typography>
                         <Typography sx={{ color: "white", display: "block" }}>
                             <LinkDom
-                                to="/invoices"
+                                to="/add-invoice"
                                 style={{
                                     color: "white",
                                     textDecoration: "none",
@@ -185,7 +193,11 @@ function InvoicesAppBar() {
                                 onClick={handleOpenUserMenu}
                                 sx={{ p: 0 }}
                             >
-                                <Avatar>R</Avatar>
+                                {doesSessionExist ? (
+                                    <Avatar>U</Avatar>
+                                ) : (
+                                    <Avatar>G</Avatar>
+                                )}
                             </IconButton>
                         </Tooltip>
                         <Menu
@@ -205,13 +217,13 @@ function InvoicesAppBar() {
                             onClose={handleCloseUserMenu}
                         >
                             {doesSessionExist ? (
-                                <MenuItem onClick={handleCloseUserMenu}>
+                                <MenuItem onClick={handleLogOut}>
                                     <Typography textAlign="center">
                                         Cerrar sesión
                                     </Typography>
                                 </MenuItem>
                             ) : (
-                                <MenuItem onClick={handleCloseUserMenu}>
+                                <MenuItem onClick={handleSignIn}>
                                     <Typography textAlign="center">
                                         Iniciar sesión
                                     </Typography>

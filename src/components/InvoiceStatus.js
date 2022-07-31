@@ -5,7 +5,7 @@ import CheckCircleOutlineIcon from "@mui/icons-material/CheckCircleOutline";
 import ErrorOutlineIcon from "@mui/icons-material/ErrorOutline";
 
 function InvoiceStatus({ paidStatus }) {
-    if (paidStatus === "pagada") {
+    if (paidStatus === "Pagada") {
         return (
             <Stack
                 direction="row"

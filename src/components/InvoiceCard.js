@@ -29,7 +29,7 @@ export default function InvoiceCard() {
                     <Typography variant="body1" color="initial">
                         Vence
                     </Typography>
-                    <InvoiceStatus paidStatus="pagada" />
+                    <InvoiceStatus paidStatus="Pagada" />
                 </Stack>
                 <Typography variant="body1" color="initial" sx={{ mb: 1 }}>
                     4/08/2022
