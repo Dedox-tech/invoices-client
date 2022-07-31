@@ -80,7 +80,9 @@ export default function Home() {
                             size="large"
                             sx={{ mt: 3 }}
                         >
-                            Iniciar ahora
+                            {doesSessionExist
+                                ? "Ir al dashboard"
+                                : "Iniciar ahora"}
                             <ArrowRightAltIcon sx={{ ml: 1 }} />
                         </Button>
                     </Grid>

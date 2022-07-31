@@ -19,6 +19,7 @@ import { useFormik } from "formik";
 import { AdapterDateFns } from "@mui/x-date-pickers/AdapterDateFns";
 import { LocalizationProvider } from "@mui/x-date-pickers/LocalizationProvider";
 import { DatePicker } from "@mui/x-date-pickers/DatePicker";
+import { es } from "date-fns/locale";
 import PropTypes from "prop-types";
 import SpacingBox from "./SpacingBox";
 
@@ -306,7 +307,10 @@ function MaterialForm({ isAddInvoiceForm }) {
                     <Typography variant="h6" sx={{ mt: 4 }}>
                         Detalles
                     </Typography>
-                    <LocalizationProvider dateAdapter={AdapterDateFns}>
+                    <LocalizationProvider
+                        dateAdapter={AdapterDateFns}
+                        locale={es}
+                    >
                         <DatePicker
                             onChange={(value) => {
                                 formik.setFieldValue(
@@ -332,6 +336,7 @@ function MaterialForm({ isAddInvoiceForm }) {
                         <Select
                             name="invoiceStatus"
                             id="invoiceStatus"
+                            label="Estado"
                             onChange={formik.handleChange}
                             value={formik.values.invoiceStatus}
                             error={
