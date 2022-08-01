@@ -17,7 +17,7 @@ import MenuIcon from "@mui/icons-material/Menu";
 import { Link as LinkDom, useNavigate } from "react-router-dom";
 import { useSessionContext } from "supertokens-auth-react/recipe/session";
 import { signOut } from "supertokens-auth-react/recipe/emailpassword";
-import useGetUserInfo from "../utils/data fetching/useGetUserInfo";
+import useGetUserInfo from "../utils/data-fetching/useGetUserInfo";
 
 export default function NavBar() {
     const [anchorElNav, setAnchorElNav] = React.useState(null);
