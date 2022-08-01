@@ -318,7 +318,7 @@ function MaterialForm({ isAddInvoiceForm }) {
                     </Typography>
                     <LocalizationProvider
                         dateAdapter={AdapterDateFns}
-                        locale={es}
+                        adapterLocale={es}
                     >
                         <DatePicker
                             onChange={(value) => {
@@ -328,6 +328,7 @@ function MaterialForm({ isAddInvoiceForm }) {
                                 );
                             }}
                             value={formik.values.invoiceDate}
+                            inputFormat="dd/MM/yyyy"
                             label="Fecha de la factura"
                             renderInput={(params) => (
                                 <TextField

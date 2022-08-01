@@ -11,9 +11,7 @@ export default async function postInvoice(data) {
         }
     );
     if (!response.ok) {
-        throw new Error(
-            "Oops, ha ocurrido un error mientras obteníamos los datos"
-        );
+        throw new Error("Oops, lo sentimos, no pudimos añadir su factura");
     }
     return response.json();
 }

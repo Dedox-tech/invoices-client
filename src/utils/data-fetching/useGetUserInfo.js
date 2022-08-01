@@ -7,7 +7,7 @@ export default function useGetUserInfo() {
         );
         if (!response.ok) {
             throw new Error(
-                "Oops, ha ocurrido un error mientras obteníamos los datos"
+                "Oops, lo sentimos, no pudimos obtener la info del usuario"
             );
         }
         return response.json();

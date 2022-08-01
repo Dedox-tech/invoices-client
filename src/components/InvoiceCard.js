@@ -12,11 +12,13 @@ import {
     DialogContent,
     DialogContentText,
     DialogActions,
+    Skeleton,
 } from "@mui/material";
 import { useNavigate } from "react-router-dom";
+import PropTypes from "prop-types";
 import InvoiceStatus from "./InvoiceStatus";
 
-export default function InvoiceCard() {
+function InvoiceCard({ isLoading, isFetching, name, date, status, amount }) {
     const navigate = useNavigate();
     const [isOpen, setIsOpen] = useState(false);
 
@@ -40,23 +42,42 @@ export default function InvoiceCard() {
         <Box>
             <Card variant="outlined">
                 <CardContent>
-                    <Typography paragraph> Joseph Collins</Typography>
+                    <Typography paragraph>
+                        {isLoading || isFetching ? <Skeleton /> : name}
+                    </Typography>
                     <Stack
                         direction="row"
                         justifyContent="space-between"
                         alignItems="flex-start"
                         spacing={2}
                     >
-                        <Typography variant="body1" color="initial">
-                            Vence
-                        </Typography>
-                        <InvoiceStatus paidStatus="Pagada" />
+                        {isLoading || isFetching ? (
+                            <Skeleton width={45} height={25} />
+                        ) : (
+                            <>
+                                <Typography variant="body1" color="initial">
+                                    Vence
+                                </Typography>
+                                <InvoiceStatus
+                                    paidStatus={status}
+                                    isDone={!(isLoading || isFetching)}
+                                />
+                            </>
+                        )}
                     </Stack>
                     <Typography variant="body1" color="initial" sx={{ mb: 1 }}>
-                        4/08/2022
+                        {isLoading || isFetching ? (
+                            <Skeleton />
+                        ) : (
+                            new Date(Number(date)).toLocaleDateString("es", {
+                                day: "2-digit",
+                                month: "2-digit",
+                                year: "numeric",
+                            })
+                        )}
                     </Typography>
                     <Typography variant="h6" color="initial">
-                        $ 50.000
+                        {isLoading || isFetching ? <Skeleton /> : `$ ${amount}`}
                     </Typography>
                 </CardContent>
                 <CardActions>
@@ -92,3 +113,25 @@ export default function InvoiceCard() {
         </Box>
     );
 }
+
+InvoiceCard.propTypes = {
+    isLoading: PropTypes.bool,
+    isFetching: PropTypes.bool,
+    name: PropTypes.string,
+    date: PropTypes.string,
+    status: PropTypes.string,
+    amount: PropTypes.number,
+    // id: PropTypes.string,
+};
+
+InvoiceCard.defaultProps = {
+    isLoading: false,
+    isFetching: false,
+    name: "No encontrado",
+    date: "No encontrado",
+    status: "No encontrado",
+    amount: 0,
+    // id: "No encontrado",
+};
+
+export default InvoiceCard;

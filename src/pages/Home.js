@@ -6,6 +6,7 @@ import { useNavigate } from "react-router-dom";
 import ArrowRightAltIcon from "@mui/icons-material/ArrowRightAlt";
 import Image from "mui-image";
 import Phone from "../images/Phone.svg";
+import Money from "../images/Money.svg";
 import NavBar from "../components/NavBar";
 
 export default function Home() {
@@ -98,7 +99,7 @@ export default function Home() {
                         }}
                     >
                         <Image
-                            src={Phone}
+                            src={doesSessionExist ? Money : Phone}
                             showLoading
                             fit="contain"
                             sx={{ p: { md: 5 } }}
