@@ -27,7 +27,7 @@ function InvoiceStatus({ paidStatus, isDone }) {
             spacing={0.3}
         >
             {paidStatus === "Pagada" ? (
-                <CheckCircleOutlineIcon color="success.main" />
+                <CheckCircleOutlineIcon color="success" />
             ) : (
                 <ErrorOutlineIcon color="error" />
             )}

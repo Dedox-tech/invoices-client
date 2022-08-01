@@ -37,7 +37,7 @@ const validationSchemaForm = object({
     customerCity: string().required("Por favor, ingrese la ciudad de su cliente."),
     customerZipCode: number().typeError("El código postal debe ser un número.").required("Por favor, ingrese el código postal de su cliente."),
     customerCountry: string().required("Por favor, ingrese el país de residencia de su cliente."),
-    // invoiceDate: string().required("Por favor, ingrese la fecha de radicado de la factura."),
+    invoiceDate: string().typeError("Por favor, ingrese la fecha de la factura.").required("Por favor, ingrese la fecha de radicado de la factura."),
     invoiceStatus: string().oneOf(["Pendiente", "Pagada"]).required("Por favor, ingrese el estado de su factura"),
     amountToPay: number().typeError("El valor debe ser un número").required("Por favor, ingrese el valor a facturar."),
     description: string().min(10, "La descripción debe ser de al menos 10 caracteres.").max(250).required("Por favor, ingrese la descripción de los servicios prestados."),
@@ -75,7 +75,7 @@ function MaterialForm({ isAddInvoiceForm }) {
         customerCity: "",
         customerZipCode: "",
         customerCountry: "",
-        invoiceDate: new Date(),
+        invoiceDate: null,
         invoiceStatus: "",
         amountToPay: "",
         description: "",
@@ -91,7 +91,7 @@ function MaterialForm({ isAddInvoiceForm }) {
         initialValues: initialValuesForm,
         validationSchema: validationSchemaForm,
         onSubmit: (values) => {
-            console.log(values);
+            console.log("Enviando datos: ", values);
             handleAddInvoice(values);
         },
     });
@@ -328,12 +328,19 @@ function MaterialForm({ isAddInvoiceForm }) {
                                 );
                             }}
                             value={formik.values.invoiceDate}
-                            inputFormat="dd/MM/yyyy"
                             label="Fecha de la factura"
                             renderInput={(params) => (
                                 <TextField
                                     id="invoiceDate"
                                     name="invoiceDate"
+                                    error={
+                                        formik.touched.invoiceDate &&
+                                        Boolean(formik.errors.invoiceDate)
+                                    }
+                                    helperText={
+                                        formik.touched.invoiceDate &&
+                                        formik.errors.invoiceDate
+                                    }
                                     fullWidth
                                     sx={{ mt: 4 }}
                                     {...params}
