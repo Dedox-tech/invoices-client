@@ -24,7 +24,7 @@ export default function App() {
                 }
             />
             <Route
-                path="/details-invoices"
+                path="/details-invoices/:id"
                 element={
                     <EmailPassword.EmailPasswordAuth>
                         <InvoiceDetails />
@@ -51,7 +51,7 @@ export default function App() {
                 path="*"
                 element={
                     <EmailPassword.EmailPasswordAuth>
-                        <AddInvoice />
+                        <Invoices />
                     </EmailPassword.EmailPasswordAuth>
                 }
             />

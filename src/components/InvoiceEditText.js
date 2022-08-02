@@ -1,9 +1,25 @@
-import React from "react";
+/* eslint-disable no-console */
+import React, { useEffect } from "react";
 import { Container, Typography, Box } from "@mui/material";
+import { useParams } from "react-router-dom";
 import { grey } from "@mui/material/colors";
 import InvoiceStatus from "./InvoiceStatus";
+import useGetSpecificInvoice from "../utils/data-fetching/useGetSpecificInvoice";
 
 export default function InvoiceEditText() {
+    const { id } = useParams();
+    const { data, error, isLoading, isFetching, isError } =
+        useGetSpecificInvoice(id);
+
+    useEffect(() => {
+        console.log("The data is:", data);
+        console.log("The isLoading: ", isLoading);
+        console.log("The isFetching:", isFetching);
+        console.log("The error is: ", error);
+        console.log("The isError is: ", isError);
+        console.log("The id is: ", id);
+    });
+
     return (
         <Container maxWidth="sm" sx={{ mt: 7, mb: 12, px: 5 }}>
             <Typography variant="subtitle1" color={grey[500]} sx={{ mb: 0.25 }}>
@@ -76,7 +92,7 @@ export default function InvoiceEditText() {
                 Estado
             </Typography>
             <Box sx={{ mb: 3 }}>
-                <InvoiceStatus paidStatus="pendiente" />
+                <InvoiceStatus paidStatus="Pendiente" />
             </Box>
             <Typography variant="body1" color={grey[500]} sx={{ mb: 0.25 }}>
                 Descripción

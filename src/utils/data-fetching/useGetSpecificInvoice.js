@@ -1,10 +1,9 @@
-/* eslint-disable no-console */
 import { useQuery } from "react-query";
 
-export default function useGetInvoices() {
-    return useQuery("getInvoices", async () => {
+export default function useGetSpecificInvoice(id) {
+    return useQuery("getSpecificInvoice", async () => {
         const response = await fetch(
-            `${process.env.REACT_APP_API_DOMAIN}/invoices`,
+            `${process.env.REACT_APP_API_DOMAIN}/invoices/${id}`,
             {
                 method: "GET",
                 mode: "cors",
@@ -13,7 +12,6 @@ export default function useGetInvoices() {
                 },
             }
         );
-        console.log(response);
         if (!response.ok) {
             throw new Error(
                 "Oops! Lo sentimos, ha surgido un problema con nuestro servidor..."

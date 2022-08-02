@@ -21,7 +21,8 @@ import { LocalizationProvider } from "@mui/x-date-pickers/LocalizationProvider";
 import { DatePicker } from "@mui/x-date-pickers/DatePicker";
 import { es } from "date-fns/locale";
 import PropTypes from "prop-types";
-import { useMutation } from "react-query";
+import { useMutation, useQueryClient } from "react-query";
+import { useNavigate } from "react-router-dom";
 import SpacingBox from "./SpacingBox";
 import postInvoice from "../utils/data-fetching/postInvoice";
 
@@ -44,6 +45,9 @@ const validationSchemaForm = object({
 });
 
 function MaterialForm({ isAddInvoiceForm }) {
+    const navigate = useNavigate();
+    const queryClient = useQueryClient();
+
     if (!isAddInvoiceForm) {
         // eslint-disable-next-line no-unused-vars
         const initialValuesForm = {
@@ -81,10 +85,15 @@ function MaterialForm({ isAddInvoiceForm }) {
         description: "",
     };
 
-    const addMutation = useMutation(postInvoice);
+    const addMutation = useMutation(postInvoice, {
+        onSuccess: () => {
+            queryClient.invalidateQueries("getInvoices");
+        },
+    });
 
     const handleAddInvoice = (data) => {
         addMutation.mutate(data);
+        navigate("/invoices");
     };
 
     const formik = useFormik({

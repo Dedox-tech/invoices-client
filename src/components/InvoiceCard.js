@@ -18,7 +18,15 @@ import { useNavigate } from "react-router-dom";
 import PropTypes from "prop-types";
 import InvoiceStatus from "./InvoiceStatus";
 
-function InvoiceCard({ isLoading, isFetching, name, date, status, amount }) {
+function InvoiceCard({
+    isLoading,
+    isFetching,
+    name,
+    date,
+    status,
+    amount,
+    id,
+}) {
     const navigate = useNavigate();
     const [isOpen, setIsOpen] = useState(false);
 
@@ -35,7 +43,7 @@ function InvoiceCard({ isLoading, isFetching, name, date, status, amount }) {
     };
 
     const handleClickDetails = async () => {
-        navigate("/details-invoices");
+        navigate(`/details-invoices/${id}`);
     };
 
     return (
@@ -58,10 +66,7 @@ function InvoiceCard({ isLoading, isFetching, name, date, status, amount }) {
                                 <Typography variant="body1" color="initial">
                                     Vence
                                 </Typography>
-                                <InvoiceStatus
-                                    paidStatus={status}
-                                    isDone={!(isLoading || isFetching)}
-                                />
+                                <InvoiceStatus paidStatus={status} />
                             </>
                         )}
                     </Stack>
@@ -121,7 +126,7 @@ InvoiceCard.propTypes = {
     date: PropTypes.string,
     status: PropTypes.string,
     amount: PropTypes.number,
-    // id: PropTypes.string,
+    id: PropTypes.string,
 };
 
 InvoiceCard.defaultProps = {
@@ -131,7 +136,7 @@ InvoiceCard.defaultProps = {
     date: "No encontrado",
     status: "No encontrado",
     amount: 0,
-    // id: "No encontrado",
+    id: "No encontrado",
 };
 
 export default InvoiceCard;
