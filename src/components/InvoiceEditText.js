@@ -1,24 +1,19 @@
 /* eslint-disable no-console */
-import React, { useEffect } from "react";
-import { Container, Typography, Box } from "@mui/material";
+import React from "react";
+import { Container, Typography, Box, Skeleton } from "@mui/material";
 import { useParams } from "react-router-dom";
 import { grey } from "@mui/material/colors";
 import InvoiceStatus from "./InvoiceStatus";
 import useGetSpecificInvoice from "../utils/data-fetching/useGetSpecificInvoice";
+import CustomErrorMessage from "./CustomErrorMessage";
 
 export default function InvoiceEditText() {
     const { id } = useParams();
-    const { data, error, isLoading, isFetching, isError } =
-        useGetSpecificInvoice(id);
+    const { data, error, isLoading, isFetching } = useGetSpecificInvoice(id);
 
-    useEffect(() => {
-        console.log("The data is:", data);
-        console.log("The isLoading: ", isLoading);
-        console.log("The isFetching:", isFetching);
-        console.log("The error is: ", error);
-        console.log("The isError is: ", isError);
-        console.log("The id is: ", id);
-    });
+    if (error) {
+        return <CustomErrorMessage message={error.message} />;
+    }
 
     return (
         <Container maxWidth="sm" sx={{ mt: 7, mb: 12, px: 5 }}>
@@ -31,7 +26,11 @@ export default function InvoiceEditText() {
                 paragraph
                 sx={{ mb: 3 }}
             >
-                15786 Golfview Dr Blvd, Riverview, Michigan(MI)
+                {isLoading || isFetching ? (
+                    <Skeleton />
+                ) : (
+                    `${data.invoice.zipCodeFrom}, ${data.invoice.addressFrom}, ${data.invoice.cityFrom}`
+                )}
             </Typography>
             <Typography variant="subtitle1" color={grey[500]} sx={{ mb: 0.25 }}>
                 País de emisión
@@ -42,7 +41,11 @@ export default function InvoiceEditText() {
                 paragraph
                 sx={{ mb: 3 }}
             >
-                USA
+                {isLoading || isFetching ? (
+                    <Skeleton />
+                ) : (
+                    data.invoice.countryFrom
+                )}
             </Typography>
             <Typography variant="subtitle1" color={grey[500]} sx={{ mb: 0.25 }}>
                 Facturada a
@@ -53,7 +56,11 @@ export default function InvoiceEditText() {
                 paragraph
                 sx={{ mb: 3 }}
             >
-                Juan Peréz Ortega
+                {isLoading || isFetching ? (
+                    <Skeleton />
+                ) : (
+                    data.invoice.customerName
+                )}
             </Typography>
             <Typography variant="subtitle1" color={grey[500]} sx={{ mb: 0.25 }}>
                 Enviada a
@@ -64,7 +71,11 @@ export default function InvoiceEditText() {
                 paragraph
                 sx={{ mb: 3 }}
             >
-                hola@example.com
+                {isLoading || isFetching ? (
+                    <Skeleton />
+                ) : (
+                    data.invoice.customerEmail
+                )}
             </Typography>
             <Typography variant="subtitle1" color={grey[500]} sx={{ mb: 0.25 }}>
                 Dirección de envio
@@ -75,7 +86,11 @@ export default function InvoiceEditText() {
                 paragraph
                 sx={{ mb: 3 }}
             >
-                15786 Golfview Dr Blvd, Riverview, Michigan(MI)
+                {isLoading || isFetching ? (
+                    <Skeleton />
+                ) : (
+                    `${data.invoice.customerZipCode}, ${data.invoice.customerAddress}, ${data.invoice.customerCity}`
+                )}
             </Typography>
             <Typography variant="subtitle1" color={grey[500]} sx={{ mb: 0.25 }}>
                 País de envío
@@ -86,13 +101,21 @@ export default function InvoiceEditText() {
                 paragraph
                 sx={{ mb: 3 }}
             >
-                USA
+                {isLoading || isFetching ? (
+                    <Skeleton />
+                ) : (
+                    data.invoice.customerCountry
+                )}
             </Typography>
             <Typography variant="body1" color={grey[500]} sx={{ mb: 0.25 }}>
                 Estado
             </Typography>
             <Box sx={{ mb: 3 }}>
-                <InvoiceStatus paidStatus="Pendiente" />
+                {isLoading || isFetching ? (
+                    <Skeleton width={45} height={25} />
+                ) : (
+                    <InvoiceStatus paidStatus={data.invoice.invoiceStatus} />
+                )}
             </Box>
             <Typography variant="body1" color={grey[500]} sx={{ mb: 0.25 }}>
                 Descripción
@@ -104,9 +127,11 @@ export default function InvoiceEditText() {
                 sx={{ mb: 3 }}
                 lineHeight="1.75"
             >
-                Esta factura se causó por la prestación de servicios de diseño
-                gráfico. Se cobran el diseño del banner y las campañas de email
-                marketing.
+                {isLoading || isFetching ? (
+                    <Skeleton />
+                ) : (
+                    data.invoice.description
+                )}
             </Typography>
         </Container>
     );
