@@ -1,4 +1,5 @@
-import React, { useEffect, useState } from "react";
+/* eslint-disable no-console */
+import React, { useState } from "react";
 import {
     Card,
     CardContent,
@@ -16,8 +17,9 @@ import {
 } from "@mui/material";
 import { useNavigate } from "react-router-dom";
 import PropTypes from "prop-types";
+import { useMutation, useQueryClient } from "react-query";
 import InvoiceStatus from "./InvoiceStatus";
-import useDeleteInvoice from "../utils/data-fetching/useDeleteInvoice";
+import deleteInvoice from "../utils/data-fetching/deleteInvoice";
 
 function InvoiceCard({
     isLoading,
@@ -29,8 +31,8 @@ function InvoiceCard({
     id,
 }) {
     const navigate = useNavigate();
+    const queryClient = useQueryClient();
     const [isOpen, setIsOpen] = useState(false);
-    const { deleteInvoice } = useDeleteInvoice()
 
     const handleClose = () => {
         setIsOpen(false);
@@ -40,18 +42,20 @@ function InvoiceCard({
         setIsOpen(true);
     };
 
+    const deleteMutation = useMutation(deleteInvoice, {
+        onSuccess: () => {
+            queryClient.invalidateQueries("getInvoices");
+        },
+    });
+
     const handleDeleteInvoice = () => {
-        deleteInvoice(id)
+        deleteMutation.mutate({ id });
         setIsOpen(false);
     };
 
     const handleClickDetails = async () => {
         navigate(`/details-invoices/${id}`);
     };
-
-    useEffect(() => {
-        console.log(id);
-    }, [id]);
 
     return (
         <Box>

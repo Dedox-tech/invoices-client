@@ -1,5 +1,4 @@
-/* eslint-disable no-console */
-import React, { useEffect } from "react";
+import React from "react";
 import { Container, Grid } from "@mui/material";
 import InvoiceCard from "./InvoiceCard";
 import useGetInvoices from "../utils/data-fetching/useGetInvoices";
@@ -11,10 +10,6 @@ export default function InvoiceList() {
     if (error) {
         return <CustomErrorMessage message={error.message} />;
     }
-
-    useEffect(() => {
-        console.log(data);
-    });
 
     if (isLoading) {
         const numberOfCards = 8;
