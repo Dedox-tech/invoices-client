@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import {
     Card,
     CardContent,
@@ -17,6 +17,7 @@ import {
 import { useNavigate } from "react-router-dom";
 import PropTypes from "prop-types";
 import InvoiceStatus from "./InvoiceStatus";
+import useDeleteInvoice from "../utils/data-fetching/useDeleteInvoice";
 
 function InvoiceCard({
     isLoading,
@@ -29,6 +30,7 @@ function InvoiceCard({
 }) {
     const navigate = useNavigate();
     const [isOpen, setIsOpen] = useState(false);
+    const { deleteInvoice } = useDeleteInvoice()
 
     const handleClose = () => {
         setIsOpen(false);
@@ -39,12 +41,17 @@ function InvoiceCard({
     };
 
     const handleDeleteInvoice = () => {
+        deleteInvoice(id)
         setIsOpen(false);
     };
 
     const handleClickDetails = async () => {
         navigate(`/details-invoices/${id}`);
     };
+
+    useEffect(() => {
+        console.log(id);
+    }, [id]);
 
     return (
         <Box>
