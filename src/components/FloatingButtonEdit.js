@@ -1,13 +1,14 @@
 import React from "react";
 import { Fab } from "@mui/material";
 import EditIcon from "@mui/icons-material/Edit";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 
 export default function FloatingButtonEdit() {
     const navigate = useNavigate();
+    const { id } = useParams();
 
     const handleClickEdit = () => {
-        navigate("/edit-invoice");
+        navigate(`/edit-invoice/${id}`);
     };
 
     return (

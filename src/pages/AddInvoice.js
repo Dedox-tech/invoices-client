@@ -7,7 +7,7 @@ export default function AddInvoice() {
     return (
         <Box>
             <NavBar />
-            <MaterialForm isAddInvoiceForm />
+            <MaterialForm />
         </Box>
     );
 }

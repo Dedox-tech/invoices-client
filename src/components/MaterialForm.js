@@ -25,6 +25,7 @@ import { useMutation, useQueryClient } from "react-query";
 import { useNavigate } from "react-router-dom";
 import SpacingBox from "./SpacingBox";
 import postInvoice from "../utils/data-fetching/postInvoice";
+import updateInvoice from "../utils/data-fetching/updateInvoice";
 
 // prettier-ignore
 const validationSchemaForm = object({
@@ -44,13 +45,13 @@ const validationSchemaForm = object({
     description: string().min(10, "La descripción debe ser de al menos 10 caracteres.").max(250).required("Por favor, ingrese la descripción de los servicios prestados."),
 });
 
-function MaterialForm({ isAddInvoiceForm }) {
+function MaterialForm({ editInvoiceData, currentId }) {
     const navigate = useNavigate();
     const queryClient = useQueryClient();
+    let initialValuesForm;
 
-    if (!isAddInvoiceForm) {
-        // eslint-disable-next-line no-unused-vars
-        const initialValuesForm = {
+    if (!editInvoiceData && !currentId) {
+        initialValuesForm = {
             addressFrom: "",
             cityFrom: "",
             zipCodeFrom: "",
@@ -61,31 +62,23 @@ function MaterialForm({ isAddInvoiceForm }) {
             customerCity: "",
             customerZipCode: "",
             customerCountry: "",
-            invoiceDate: "",
+            invoiceDate: null,
             invoiceStatus: "",
             amountToPay: "",
             description: "",
         };
+    } else {
+        const { id, ...data } = editInvoiceData;
+        initialValuesForm = data;
     }
 
-    const initialValuesForm = {
-        addressFrom: "",
-        cityFrom: "",
-        zipCodeFrom: "",
-        countryFrom: "",
-        customerName: "",
-        customerEmail: "",
-        customerAddress: "",
-        customerCity: "",
-        customerZipCode: "",
-        customerCountry: "",
-        invoiceDate: null,
-        invoiceStatus: "",
-        amountToPay: "",
-        description: "",
-    };
-
     const addMutation = useMutation(postInvoice, {
+        onSuccess: () => {
+            queryClient.invalidateQueries("getInvoices");
+        },
+    });
+
+    const updateMutation = useMutation(updateInvoice, {
         onSuccess: () => {
             queryClient.invalidateQueries("getInvoices");
         },
@@ -96,12 +89,23 @@ function MaterialForm({ isAddInvoiceForm }) {
         navigate("/invoices");
     };
 
+    const handleUpdateInvoice = (data, id) => {
+        console.log({ ...data, id });
+        updateMutation.mutate({ ...data, id });
+        navigate("/invoices");
+    };
+
     const formik = useFormik({
         initialValues: initialValuesForm,
         validationSchema: validationSchemaForm,
         onSubmit: (values) => {
             console.log("Enviando datos: ", values);
-            handleAddInvoice(values);
+            if (!editInvoiceData && !currentId) {
+                handleAddInvoice(values);
+            } else {
+                console.log("Actualizando");
+                handleUpdateInvoice(values, currentId);
+            }
         },
     });
 
@@ -111,7 +115,7 @@ function MaterialForm({ isAddInvoiceForm }) {
             <form onSubmit={formik.handleSubmit}>
                 <Container maxWidth="sm" sx={{ px: 5 }}>
                     <Typography variant="h4" sx={{ mt: 6 }} align="center">
-                        {isAddInvoiceForm ? "Añadir factura" : "Editar factura"}
+                        {editInvoiceData ? "Editar Factura" : "Añadir factura"}
                     </Typography>
                     <Typography variant="h6" sx={{ mt: 4 }}>
                         Facturar desde
@@ -436,7 +440,29 @@ function MaterialForm({ isAddInvoiceForm }) {
 }
 
 MaterialForm.propTypes = {
-    isAddInvoiceForm: PropTypes.bool.isRequired,
+    editInvoiceData: PropTypes.shape({
+        addressFrom: PropTypes.string,
+        cityFrom: PropTypes.string,
+        zipCodeFrom: PropTypes.number,
+        countryFrom: PropTypes.string,
+        customerName: PropTypes.string,
+        customerEmail: PropTypes.string,
+        customerAddress: PropTypes.string,
+        customerCity: PropTypes.string,
+        customerZipCode: PropTypes.number,
+        customerCountry: PropTypes.string,
+        invoiceDate: PropTypes.string,
+        invoiceStatus: PropTypes.string,
+        amountToPay: PropTypes.number,
+        description: PropTypes.string,
+        id: PropTypes.string,
+    }),
+    currentId: PropTypes.string,
+};
+
+MaterialForm.defaultProps = {
+    editInvoiceData: null,
+    currentId: null,
 };
 
 export default MaterialForm;

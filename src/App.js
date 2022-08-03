@@ -40,7 +40,7 @@ export default function App() {
                 }
             />
             <Route
-                path="/edit-invoice"
+                path="/edit-invoice/:id"
                 element={
                     <EmailPassword.EmailPasswordAuth>
                         <EditInvoice />
