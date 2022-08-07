@@ -1,3 +1,4 @@
+/* eslint-disable no-console */
 import React from "react";
 import {
     AppBar,
@@ -13,18 +14,21 @@ import {
 } from "@mui/material";
 import AssignmentIcon from "@mui/icons-material/Assignment";
 import MenuIcon from "@mui/icons-material/Menu";
-import { Link as LinkDom } from "react-router-dom";
+import { Link as LinkDom, useNavigate } from "react-router-dom";
+import { useSessionContext } from "supertokens-auth-react/recipe/session";
+import { signOut } from "supertokens-auth-react/recipe/emailpassword";
+import useGetUserInfo from "../utils/data-fetching/useGetUserInfo";
 
 export default function NavBar() {
-    return <InvoicesAppBar />;
-}
-
-// const pages = ['Products', 'Pricing', 'Blog'];
-const settings = ["Iniciar sesión"];
-
-function InvoicesAppBar() {
     const [anchorElNav, setAnchorElNav] = React.useState(null);
     const [anchorElUser, setAnchorElUser] = React.useState(null);
+
+    const session = useSessionContext();
+    const { doesSessionExist } = session;
+
+    const { data } = useGetUserInfo();
+
+    const navigate = useNavigate();
 
     const handleOpenNavMenu = (event) => {
         setAnchorElNav(event.currentTarget);
@@ -32,13 +36,24 @@ function InvoicesAppBar() {
     const handleOpenUserMenu = (event) => {
         setAnchorElUser(event.currentTarget);
     };
-
     const handleCloseNavMenu = () => {
         setAnchorElNav(null);
     };
-
     const handleCloseUserMenu = () => {
         setAnchorElUser(null);
+    };
+
+    const handleLogOut = async () => {
+        handleCloseUserMenu();
+        handleCloseNavMenu();
+        await signOut();
+        navigate("/");
+    };
+
+    const handleSignIn = () => {
+        handleCloseUserMenu();
+        handleCloseNavMenu();
+        navigate("/auth");
     };
 
     return (
@@ -115,7 +130,7 @@ function InvoicesAppBar() {
                             <MenuItem onClick={handleCloseNavMenu}>
                                 <Typography textAlign="center">
                                     <LinkDom
-                                        to="/invoices"
+                                        to="/add-invoice"
                                         style={{
                                             color: "black",
                                             textDecoration: "none",
@@ -169,7 +184,7 @@ function InvoicesAppBar() {
                         </Typography>
                         <Typography sx={{ color: "white", display: "block" }}>
                             <LinkDom
-                                to="/invoices"
+                                to="/add-invoice"
                                 style={{
                                     color: "white",
                                     textDecoration: "none",
@@ -186,10 +201,15 @@ function InvoicesAppBar() {
                                 onClick={handleOpenUserMenu}
                                 sx={{ p: 0 }}
                             >
-                                <Avatar
-                                    alt="Remy Sharp"
-                                    src="/static/images/avatar/2.jpg"
-                                />
+                                {doesSessionExist && data ? (
+                                    <Avatar>
+                                        {data.userCompleteInfo[0].nombre.charAt(
+                                            0
+                                        )}
+                                    </Avatar>
+                                ) : (
+                                    <Avatar>G</Avatar>
+                                )}
                             </IconButton>
                         </Tooltip>
                         <Menu
@@ -208,16 +228,19 @@ function InvoicesAppBar() {
                             open={Boolean(anchorElUser)}
                             onClose={handleCloseUserMenu}
                         >
-                            {settings.map((setting) => (
-                                <MenuItem
-                                    key={setting}
-                                    onClick={handleCloseUserMenu}
-                                >
+                            {doesSessionExist ? (
+                                <MenuItem onClick={handleLogOut}>
                                     <Typography textAlign="center">
-                                        {setting}
+                                        Cerrar sesión
                                     </Typography>
                                 </MenuItem>
-                            ))}
+                            ) : (
+                                <MenuItem onClick={handleSignIn}>
+                                    <Typography textAlign="center">
+                                        Iniciar sesión
+                                    </Typography>
+                                </MenuItem>
+                            )}
                         </Menu>
                     </Box>
                 </Toolbar>

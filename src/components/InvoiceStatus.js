@@ -5,25 +5,6 @@ import CheckCircleOutlineIcon from "@mui/icons-material/CheckCircleOutline";
 import ErrorOutlineIcon from "@mui/icons-material/ErrorOutline";
 
 function InvoiceStatus({ paidStatus }) {
-    if (paidStatus === "pagada") {
-        return (
-            <Stack
-                direction="row"
-                alignItems="center"
-                justifyContent="left"
-                spacing={0.25}
-            >
-                <CheckCircleOutlineIcon color="success" />
-                <Typography
-                    variant="body1"
-                    color="success.main"
-                    sx={{ fontWeight: 500 }}
-                >
-                    Pagada
-                </Typography>
-            </Stack>
-        );
-    }
     return (
         <Stack
             direction="row"
@@ -31,13 +12,17 @@ function InvoiceStatus({ paidStatus }) {
             justifyContent="left"
             spacing={0.3}
         >
-            <ErrorOutlineIcon color="error" />
+            {paidStatus === "Pagada" ? (
+                <CheckCircleOutlineIcon color="success" />
+            ) : (
+                <ErrorOutlineIcon color="error" />
+            )}
             <Typography
                 variant="body1"
-                color="error.main"
+                color={paidStatus === "Pagada" ? "success.main" : "error"}
                 sx={{ fontWeight: 500 }}
             >
-                Pendiente
+                {paidStatus}
             </Typography>
         </Stack>
     );
