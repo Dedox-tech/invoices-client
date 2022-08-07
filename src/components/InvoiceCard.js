@@ -97,16 +97,33 @@ function InvoiceCard({
                     </Typography>
                 </CardContent>
                 <CardActions>
-                    <Button
-                        variant="text"
-                        color="primary"
-                        onClick={handleClickDetails}
-                    >
-                        Ver detalles
-                    </Button>
-                    <Button variant="text" color="primary" onClick={handleOpen}>
-                        Eliminar
-                    </Button>
+                    {isLoading || isFetching ? (
+                        <Box>
+                            <Button variant="text" color="primary">
+                                Ver detalles
+                            </Button>
+                            <Button variant="text" color="primary">
+                                Eliminar
+                            </Button>
+                        </Box>
+                    ) : (
+                        <Box>
+                            <Button
+                                variant="text"
+                                color="primary"
+                                onClick={handleClickDetails}
+                            >
+                                Ver detalles
+                            </Button>
+                            <Button
+                                variant="text"
+                                color="primary"
+                                onClick={handleOpen}
+                            >
+                                Eliminar
+                            </Button>
+                        </Box>
+                    )}
                 </CardActions>
             </Card>
             <Dialog open={isOpen} onClose={handleClose}>
