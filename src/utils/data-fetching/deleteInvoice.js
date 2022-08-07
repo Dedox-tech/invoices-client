@@ -1,7 +1,7 @@
 /* eslint-disable no-console */
 export default async function deleteInvoice(invoiceId) {
     const response = await fetch(
-        `${process.env.NODE_ENV.REACT_APP_API_DOMAIN}/invoices/${invoiceId.id}`,
+        `${process.env.REACT_APP_API_DOMAIN}/invoices/${invoiceId.id}`,
         {
             method: "DELETE",
             mode: "cors",

@@ -1,6 +1,6 @@
 export default async function postInvoice(data) {
     const response = await fetch(
-        `${process.env.NODE_ENV.REACT_APP_API_DOMAIN}/invoices`,
+        `${process.env.REACT_APP_API_DOMAIN}/invoices`,
         {
             method: "POST",
             mode: "cors",

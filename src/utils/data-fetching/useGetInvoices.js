@@ -4,7 +4,7 @@ import { useQuery } from "react-query";
 export default function useGetInvoices() {
     return useQuery("getInvoices", async () => {
         const response = await fetch(
-            `${process.env.NODE_ENV.REACT_APP_API_DOMAIN}/invoices`,
+            `${process.env.REACT_APP_API_DOMAIN}/invoices`,
             {
                 method: "GET",
                 mode: "cors",

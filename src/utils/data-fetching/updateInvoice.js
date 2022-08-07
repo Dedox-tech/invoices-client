@@ -1,6 +1,6 @@
 export default async function updateInvoice(data) {
     const response = await fetch(
-        `${process.env.NODE_ENV.REACT_APP_API_DOMAIN}/invoices/${data.id}`,
+        `${process.env.REACT_APP_API_DOMAIN}/invoices/${data.id}`,
         {
             method: "PUT",
             mode: "cors",
