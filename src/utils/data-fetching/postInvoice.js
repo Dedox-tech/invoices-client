@@ -10,8 +10,19 @@ export default async function postInvoice(data) {
             body: JSON.stringify(data),
         }
     );
+
+    if (response.status === 400) {
+        throw new Error("La factura no pudo ser añadida. Intente nuevamente");
+    }
+
+    if (response.status === 500) {
+        throw new Error(
+            "La factura no pudo ser añadida, hubo un error con nuestro sistema"
+        );
+    }
+
     if (!response.ok) {
-        throw new Error("Oops, lo sentimos, no pudimos añadir su factura");
+        throw new Error("Oops! Lo sentimos, ha ocurrido un error inesperado");
     }
     return response.json();
 }

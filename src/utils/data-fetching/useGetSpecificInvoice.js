@@ -12,9 +12,22 @@ export default function useGetSpecificInvoice(id) {
                 },
             }
         );
+
+        if (response.status === 404) {
+            throw new Error(
+                "Esta factura no fue encontrada en nuestros registros"
+            );
+        }
+
+        if (response.status === 500) {
+            throw new Error(
+                "No pudimos obtener la información de su factura, hubo un error con nuestro sistema"
+            );
+        }
+
         if (!response.ok) {
             throw new Error(
-                "Oops! Lo sentimos, ha surgido un problema con nuestro servidor..."
+                "Oops! Lo sentimos, ha ocurrido un error inesperado"
             );
         }
         return response.json();
