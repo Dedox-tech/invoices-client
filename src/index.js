@@ -3,6 +3,7 @@ import ReactDOM from "react-dom/client";
 import "./index.css";
 import SuperTokens, { SuperTokensWrapper } from "supertokens-auth-react";
 import { BrowserRouter } from "react-router-dom";
+import { QueryClient, QueryClientProvider } from "react-query";
 import { CssBaseline } from "@mui/material";
 import App from "./App";
 import generalConfiguration from "./utils/supertokens/configurations/generalConfiguration";
@@ -13,14 +14,17 @@ import "@fontsource/roboto/500.css";
 import "@fontsource/roboto/700.css";
 
 SuperTokens.init(generalConfiguration);
+const queryClient = new QueryClient();
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
     <React.StrictMode>
         <SuperTokensWrapper>
             <BrowserRouter>
-                <CssBaseline />
-                <App />
+                <QueryClientProvider client={queryClient}>
+                    <CssBaseline />
+                    <App />
+                </QueryClientProvider>
             </BrowserRouter>
         </SuperTokensWrapper>
     </React.StrictMode>

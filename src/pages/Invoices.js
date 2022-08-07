@@ -14,7 +14,7 @@ export default function Invoices() {
             console.log(data);
         };
         fetchData();
-    });
+    }, []);
 
     useEffect(() => {
         const fetchData = async () => {
@@ -23,7 +23,7 @@ export default function Invoices() {
             console.log(data);
         };
         fetchData();
-    });
+    }, []);
 
     return (
         <Box>

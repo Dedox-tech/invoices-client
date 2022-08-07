@@ -5,6 +5,8 @@ import { getSuperTokensRoutesForReactRouterDom } from "supertokens-auth-react";
 import EmailPassword from "supertokens-auth-react/recipe/emailpassword";
 import Home from "./pages/Home";
 import Invoices from "./pages/Invoices";
+import InvoiceDetails from "./pages/InvoiceDetails";
+import AddInvoice from "./pages/AddInvoice";
 import EditInvoice from "./pages/EditInvoice";
 
 export default function App() {
@@ -22,7 +24,23 @@ export default function App() {
                 }
             />
             <Route
-                path="/details-invoices"
+                path="/details-invoices/:id"
+                element={
+                    <EmailPassword.EmailPasswordAuth>
+                        <InvoiceDetails />
+                    </EmailPassword.EmailPasswordAuth>
+                }
+            />
+            <Route
+                path="/add-invoice"
+                element={
+                    <EmailPassword.EmailPasswordAuth>
+                        <AddInvoice />
+                    </EmailPassword.EmailPasswordAuth>
+                }
+            />
+            <Route
+                path="/edit-invoice/:id"
                 element={
                     <EmailPassword.EmailPasswordAuth>
                         <EditInvoice />
