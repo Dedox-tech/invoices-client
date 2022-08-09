@@ -1,4 +1,3 @@
-/* eslint-disable no-console */
 export default async function deleteInvoice(invoiceId) {
     const response = await fetch(
         `${process.env.REACT_APP_API_DOMAIN}/invoices/${invoiceId.id}`,
@@ -10,15 +9,17 @@ export default async function deleteInvoice(invoiceId) {
             },
         }
     );
-    console.log(response);
     if (response.status === 400) {
         throw new Error("La factura no pudo ser eliminada. Intenta nuevamente");
     }
 
     if (response.status === 500) {
         throw new Error(
-            "La factura no pudo ser eliminada, hubo un error con nuestro sistema. Intentalo más tarde."
+            "La factura no pudo ser eliminada, hubo un error con nuestro sistema. Intentalo más tarde"
         );
+    }
+    if (!response.ok) {
+        throw new Error("Oops, lo sentimos, ha ocurrido un error inesperado");
     }
     return response.json();
 }
