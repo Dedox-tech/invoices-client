@@ -1,25 +1,103 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
+import { object, string } from "yup";
 import {
+    Alert,
+    AlertTitle,
     Box,
+    Button,
     Card,
     CardActionArea,
     CardActions,
     CardContent,
     CardMedia,
+    Divider,
     Grid,
     IconButton,
+    InputAdornment,
     Link,
+    TextField,
     Typography,
 } from "@mui/material";
+import { useFormik } from "formik";
 import LinkedInIcon from "@mui/icons-material/LinkedIn";
 import GitHubIcon from "@mui/icons-material/GitHub";
+import AssignmentIndIcon from '@mui/icons-material/AssignmentInd';
+import EmailIcon from '@mui/icons-material/Email';
 import office from "../images/office.jpg";
 import diego from "../images/Diego-Murillo.jpg";
 import hector from "../images/Hector-Muñoz.jpg";
 
 export default function ContactInfo() {
+    const [isSended, setIsSended] = useState();
+
+    const formik = useFormik({
+        initialValues: {
+            completeName: "",
+            email: "",
+            message: ""
+        },
+        validationSchema: object({
+            completeName: string().required("Por favor, ingrese su nombre completo."),
+            email: string().email().required("Por favor, ingrese su correo electronico."),
+            message: string().required("Por favor, ingrese el mensaje que desea enviar.")
+        }),
+        onSubmit: (values) => {
+            fetch("https://formsubmit.co/ajax/munozmoraleshector@gmail.com", {
+                method: "POST",
+                headers: {
+                    'Content-Type': 'application/json',
+                    'Accept': 'application/json'
+                },
+                body: JSON.stringify(values)
+            })
+                .then(response => response.json())
+                .then(data => {
+                    if (data.success === 'true')
+                        setIsSended(true)
+                    else
+                        setIsSended(false)
+                })
+                .catch(error => {
+                    console.log(error)
+                    setIsSended(false)
+                });
+
+        },
+    });
+
+
+    useEffect(() => {
+        if (isSended) {
+            setTimeout(() => {
+                setIsSended(undefined)
+            }, 3000);
+        } else {
+            setTimeout(() => {
+                setIsSended(undefined)
+            }, 3000);
+        }
+
+        return () => {
+            clearTimeout()
+        }
+    }, [isSended]);
+
     return (
         <Grid sx={{ position: "relative" }}>
+            {/* eslint-disable-next-line no-nested-ternary */}
+            {isSended === undefined ?
+                null
+                : isSended ?
+                    <Alert sx={{ zIndex: "200", position: "sticky", top: 0 }} severity="success">
+                        <AlertTitle>Enviado</AlertTitle>
+                        Se envío correctamente el mensaje.
+                    </Alert>
+                    :
+                    <Alert sx={{ zIndex: "200", position: "sticky", top: 0 }} severity="error">
+                        <AlertTitle>Error</AlertTitle>
+                        No se pudo enviar el mensaje. Intentalo más tarde.
+                    </Alert>
+            }
             <Box
                 sx={{
                     position: "relative",
@@ -28,7 +106,7 @@ export default function ContactInfo() {
                     backgroundPosition: "center",
                     backgroundSize: "cover",
                     backgroundRepeat: "no-repeat",
-                    height: { xs: "200px", md: "100vh" },
+                    height: { xs: "200px", md: "93vh" },
                     opacity: "80%",
                 }}
             >
@@ -46,9 +124,9 @@ export default function ContactInfo() {
                         color: "white",
                     }}
                 >
-                    ¿Hay algún problema?
+                    ¿Algún problema con la App?
                     <Typography
-                        component="h2"
+                        component="p"
                         sx={{
                             textAlign: "center",
                             fontSize: { xs: "20px", md: "30px" },
@@ -63,9 +141,9 @@ export default function ContactInfo() {
             <Box
                 sx={{
                     position: { xs: "relative", md: "absolute" },
-                    top: { md: "50%" },
-                    left: { md: "50%" },
-                    transform: { md: "translate(-50%, -50%)" },
+                    top: { md: "25%" },
+                    left: { md: "25%" },
+                    transform: { md: "translate(-25%, -25%)" },
                     width: "100%",
                     display: "flex",
                     flexWrap: "wrap",
@@ -128,14 +206,10 @@ export default function ContactInfo() {
                             >
                                 Hector Muñoz
                             </Typography>
-                            <Typography variant="body2" color="text.secondary">
-                                Lorem ipsum dolor sit amet consectetur,
-                                adipisicing elit. Fugiat nulla nostrum deserunt
-                                explicabo nesciunt ab fuga iste quaerat eligendi
-                                tempore numquam illo hic rem porro, culpa,
-                                aperiam eum similique dolorum. Lorem ipsum dolor
-                                consectetur.
+                            <Typography sx={{ marginBottom: "20px" }} variant="body2" color="text.secondary">
+                                Desarrollador Web. Aficionado a la creación y el desarrollo continuo de aplicaciones; mejorando continuamente en los lenguajes y bases de datos que conozco.
                             </Typography>
+                            <a href="https://portfolio-hmm.netlify.app/#" target="_blank" rel="noreferrer">Portafolio</a>
                         </CardContent>
                     </CardActionArea>
                     <CardActions>
@@ -151,6 +225,82 @@ export default function ContactInfo() {
                         </IconButton>
                     </CardActions>
                 </Card>
+            </Box>
+            <Divider sx={{ my: 5 }} />
+            <Box >
+                <h3 style={{ textAlign: "center", color: "#1976d2" }}>Para dudas, comentarios o lo que sea</h3>
+                <p style={{ textAlign: "center" }}>Mandanos un mensaje</p>
+                <form action="https://formsubmit.co/munozmoraleshector@@gmail.com" method="POST" style={{ display: "flex", flexDirection: "column", alignItems: "center" }} onSubmit={formik.handleSubmit}>
+                    <TextField
+
+                        id="completeName"
+                        InputProps={{
+                            startAdornment: (
+                                <InputAdornment position="start">
+                                    <AssignmentIndIcon />
+                                </InputAdornment>
+                            ),
+                        }}
+                        name="completeName"
+                        label="Nombre Completo"
+                        onChange={formik.handleChange}
+                        value={formik.values.completeName}
+                        error={
+                            formik.touched.completeName &&
+                            Boolean(formik.errors.completeName)
+                        }
+                        helperText={
+                            formik.touched.completeName &&
+                            formik.errors.completeName
+                        }
+                        sx={{ width: { xs: "90%", md: "40%" }, mt: 4, ml: 2, mr: 2 }}
+                    />
+                    <TextField
+
+                        id="email"
+                        name="email"
+                        InputProps={{
+                            startAdornment: (
+                                <InputAdornment position="start">
+                                    <EmailIcon />
+                                </InputAdornment>
+                            ),
+                        }}
+                        label="Correo Electronico"
+                        onChange={formik.handleChange}
+                        value={formik.values.email}
+                        error={
+                            formik.touched.email &&
+                            Boolean(formik.errors.email)
+                        }
+                        helperText={
+                            formik.touched.email &&
+                            formik.errors.email
+                        }
+                        sx={{ width: { xs: "90%", md: "40%" }, mt: 2, ml: 2, mr: 2 }}
+                    />
+                    <TextField
+
+                        id="message"
+                        name="message"
+                        multiline
+                        rows={8}
+                        label="Mensaje / Comentarios"
+                        onChange={formik.handleChange}
+                        value={formik.values.message}
+                        error={
+                            formik.touched.message &&
+                            Boolean(formik.errors.message)
+                        }
+                        helperText={
+                            formik.touched.message &&
+                            formik.errors.message
+                        }
+                        variant="outlined"
+                        sx={{ width: { xs: "90%", md: "40%" }, mt: 2, ml: 2, mr: 2 }}
+                    />
+                    <Button sx={{ my: 4, width: "100px" }} variant="contained" color="primary" type="submit">Enviar</Button>
+                </form>
             </Box>
         </Grid>
     );
