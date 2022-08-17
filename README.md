@@ -35,7 +35,7 @@ cd invoices-client
 npm start
 ```
 
-No obstante, el servidor también debe estar corriendo, para ello puede ver las instrucciones acá.
+No obstante, el servidor también debe estar corriendo, para ello puede ver las instrucciones [acá](https://github.com/Dedox-tech/invoices-server).
 
 ## Usuario de prueba
 
