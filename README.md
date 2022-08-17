@@ -21,6 +21,8 @@ Luego de iniciar sesión o registrase correctamente, el usuario encontrará una 
 - FormSubmit
 - Yup
 - Material UI
+- Jest
+- React Testing Library
 - SuperTokens.io
 
 ## Correr localmente
