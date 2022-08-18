@@ -195,7 +195,9 @@ export default function NavBar() {
                                 Dashboard
                             </LinkDom>
                         </Typography>
-                        <Typography sx={{ color: "white", display: "block", mr: 2 }}>
+                        <Typography
+                            sx={{ color: "white", display: "block", mr: 2 }}
+                        >
                             <LinkDom
                                 to="/add-invoice"
                                 style={{
@@ -220,7 +222,6 @@ export default function NavBar() {
                     </Box>
 
                     <Box sx={{ flexGrow: 0 }}>
-
                         <Tooltip title="Open settings">
                             <IconButton
                                 onClick={handleOpenUserMenu}
@@ -232,9 +233,7 @@ export default function NavBar() {
                                             0
                                         )}
                                     </Avatar>
-                                ) : (
-                                    null
-                                )}
+                                ) : null}
                             </IconButton>
                         </Tooltip>
                         <Menu

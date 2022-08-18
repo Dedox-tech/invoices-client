@@ -1,3 +1,4 @@
+/* eslint-disable no-console */
 import React, { useEffect, useState } from "react";
 import { object, string } from "yup";
 import {
@@ -21,8 +22,8 @@ import {
 import { useFormik } from "formik";
 import LinkedInIcon from "@mui/icons-material/LinkedIn";
 import GitHubIcon from "@mui/icons-material/GitHub";
-import AssignmentIndIcon from '@mui/icons-material/AssignmentInd';
-import EmailIcon from '@mui/icons-material/Email';
+import AssignmentIndIcon from "@mui/icons-material/AssignmentInd";
+import EmailIcon from "@mui/icons-material/Email";
 import office from "../images/office.jpg";
 import diego from "../images/Diego-Murillo.jpg";
 import hector from "../images/Hector-Muñoz.jpg";
@@ -34,70 +35,76 @@ export default function ContactInfo() {
         initialValues: {
             completeName: "",
             email: "",
-            message: ""
+            message: "",
         },
         validationSchema: object({
-            completeName: string().required("Por favor, ingrese su nombre completo."),
-            email: string().email().required("Por favor, ingrese su correo electronico."),
-            message: string().required("Por favor, ingrese el mensaje que desea enviar.")
+            completeName: string().required(
+                "Por favor, ingrese su nombre completo."
+            ),
+            email: string()
+                .email()
+                .required("Por favor, ingrese su correo electronico."),
+            message: string().required(
+                "Por favor, ingrese el mensaje que desea enviar."
+            ),
         }),
         onSubmit: (values) => {
             fetch("https://formsubmit.co/ajax/munozmoraleshector@gmail.com", {
                 method: "POST",
                 headers: {
-                    'Content-Type': 'application/json',
-                    'Accept': 'application/json'
+                    "Content-Type": "application/json",
+                    Accept: "application/json",
                 },
-                body: JSON.stringify(values)
+                body: JSON.stringify(values),
             })
-                .then(response => response.json())
-                .then(data => {
-                    if (data.success === 'true')
-                        setIsSended(true)
-                    else
-                        setIsSended(false)
+                .then((response) => response.json())
+                .then((data) => {
+                    if (data.success === "true") setIsSended(true);
+                    else setIsSended(false);
                 })
-                .catch(error => {
-                    console.log(error)
-                    setIsSended(false)
+                .catch((error) => {
+                    console.log(error);
+                    setIsSended(false);
                 });
-
         },
     });
-
 
     useEffect(() => {
         if (isSended) {
             setTimeout(() => {
-                setIsSended(undefined)
+                setIsSended(undefined);
             }, 3000);
         } else {
             setTimeout(() => {
-                setIsSended(undefined)
+                setIsSended(undefined);
             }, 3000);
         }
 
         return () => {
-            clearTimeout()
-        }
+            clearTimeout();
+        };
     }, [isSended]);
 
     return (
         <Grid sx={{ position: "relative" }}>
             {/* eslint-disable-next-line no-nested-ternary */}
-            {isSended === undefined ?
-                null
-                : isSended ?
-                    <Alert sx={{ zIndex: "200", position: "sticky", top: 0 }} severity="success">
-                        <AlertTitle>Enviado</AlertTitle>
-                        Se envío correctamente el mensaje.
-                    </Alert>
-                    :
-                    <Alert sx={{ zIndex: "200", position: "sticky", top: 0 }} severity="error">
-                        <AlertTitle>Error</AlertTitle>
-                        No se pudo enviar el mensaje. Intentalo más tarde.
-                    </Alert>
-            }
+            {isSended === undefined ? null : isSended ? (
+                <Alert
+                    sx={{ zIndex: "200", position: "sticky", top: 0 }}
+                    severity="success"
+                >
+                    <AlertTitle>Enviado</AlertTitle>
+                    Se envío correctamente el mensaje.
+                </Alert>
+            ) : (
+                <Alert
+                    sx={{ zIndex: "200", position: "sticky", top: 0 }}
+                    severity="error"
+                >
+                    <AlertTitle>Error</AlertTitle>
+                    No se pudo enviar el mensaje. Intentalo más tarde.
+                </Alert>
+            )}
             <Box
                 sx={{
                     position: "relative",
@@ -206,10 +213,23 @@ export default function ContactInfo() {
                             >
                                 Hector Muñoz
                             </Typography>
-                            <Typography sx={{ marginBottom: "20px" }} variant="body2" color="text.secondary">
-                                Desarrollador Web. Aficionado a la creación y el desarrollo continuo de aplicaciones; mejorando continuamente en los lenguajes y bases de datos que conozco.
+                            <Typography
+                                sx={{ marginBottom: "20px" }}
+                                variant="body2"
+                                color="text.secondary"
+                            >
+                                Desarrollador Web. Aficionado a la creación y el
+                                desarrollo continuo de aplicaciones; mejorando
+                                continuamente en los lenguajes y bases de datos
+                                que conozco.
                             </Typography>
-                            <a href="https://portfolio-hmm.netlify.app/#" target="_blank" rel="noreferrer">Portafolio</a>
+                            <a
+                                href="https://portfolio-hmm.netlify.app/#"
+                                target="_blank"
+                                rel="noreferrer"
+                            >
+                                Portafolio
+                            </a>
                         </CardContent>
                     </CardActionArea>
                     <CardActions>
@@ -227,12 +247,22 @@ export default function ContactInfo() {
                 </Card>
             </Box>
             <Divider sx={{ my: 5 }} />
-            <Box >
-                <h3 style={{ textAlign: "center", color: "#1976d2" }}>Para dudas, comentarios o lo que sea</h3>
+            <Box>
+                <h3 style={{ textAlign: "center", color: "#1976d2" }}>
+                    Para dudas, comentarios o lo que sea
+                </h3>
                 <p style={{ textAlign: "center" }}>Mandanos un mensaje</p>
-                <form action="https://formsubmit.co/munozmoraleshector@@gmail.com" method="POST" style={{ display: "flex", flexDirection: "column", alignItems: "center" }} onSubmit={formik.handleSubmit}>
+                <form
+                    action="https://formsubmit.co/munozmoraleshector@@gmail.com"
+                    method="POST"
+                    style={{
+                        display: "flex",
+                        flexDirection: "column",
+                        alignItems: "center",
+                    }}
+                    onSubmit={formik.handleSubmit}
+                >
                     <TextField
-
                         id="completeName"
                         InputProps={{
                             startAdornment: (
@@ -253,10 +283,14 @@ export default function ContactInfo() {
                             formik.touched.completeName &&
                             formik.errors.completeName
                         }
-                        sx={{ width: { xs: "90%", md: "40%" }, mt: 4, ml: 2, mr: 2 }}
+                        sx={{
+                            width: { xs: "90%", md: "40%" },
+                            mt: 4,
+                            ml: 2,
+                            mr: 2,
+                        }}
                     />
                     <TextField
-
                         id="email"
                         name="email"
                         InputProps={{
@@ -270,17 +304,17 @@ export default function ContactInfo() {
                         onChange={formik.handleChange}
                         value={formik.values.email}
                         error={
-                            formik.touched.email &&
-                            Boolean(formik.errors.email)
+                            formik.touched.email && Boolean(formik.errors.email)
                         }
-                        helperText={
-                            formik.touched.email &&
-                            formik.errors.email
-                        }
-                        sx={{ width: { xs: "90%", md: "40%" }, mt: 2, ml: 2, mr: 2 }}
+                        helperText={formik.touched.email && formik.errors.email}
+                        sx={{
+                            width: { xs: "90%", md: "40%" },
+                            mt: 2,
+                            ml: 2,
+                            mr: 2,
+                        }}
                     />
                     <TextField
-
                         id="message"
                         name="message"
                         multiline
@@ -293,13 +327,24 @@ export default function ContactInfo() {
                             Boolean(formik.errors.message)
                         }
                         helperText={
-                            formik.touched.message &&
-                            formik.errors.message
+                            formik.touched.message && formik.errors.message
                         }
                         variant="outlined"
-                        sx={{ width: { xs: "90%", md: "40%" }, mt: 2, ml: 2, mr: 2 }}
+                        sx={{
+                            width: { xs: "90%", md: "40%" },
+                            mt: 2,
+                            ml: 2,
+                            mr: 2,
+                        }}
                     />
-                    <Button sx={{ my: 4, width: "100px" }} variant="contained" color="primary" type="submit">Enviar</Button>
+                    <Button
+                        sx={{ my: 4, width: "100px" }}
+                        variant="contained"
+                        color="primary"
+                        type="submit"
+                    >
+                        Enviar
+                    </Button>
                 </form>
             </Box>
         </Grid>
