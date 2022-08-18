@@ -140,19 +140,6 @@ export default function NavBar() {
                                     </LinkDom>
                                 </Typography>
                             </MenuItem>
-                            <MenuItem onClick={handleCloseNavMenu}>
-                                <Typography textAlign="center">
-                                    <LinkDom
-                                        to="/contact"
-                                        style={{
-                                            color: "black",
-                                            textDecoration: "none",
-                                        }}
-                                    >
-                                        Contacto
-                                    </LinkDom>
-                                </Typography>
-                            </MenuItem>
                         </Menu>
                     </Box>
                     <AssignmentIcon
@@ -195,9 +182,7 @@ export default function NavBar() {
                                 Dashboard
                             </LinkDom>
                         </Typography>
-                        <Typography
-                            sx={{ color: "white", display: "block", mr: 2 }}
-                        >
+                        <Typography sx={{ color: "white", display: "block" }}>
                             <LinkDom
                                 to="/add-invoice"
                                 style={{
@@ -206,17 +191,6 @@ export default function NavBar() {
                                 }}
                             >
                                 Añadir
-                            </LinkDom>
-                        </Typography>
-                        <Typography sx={{ color: "white", display: "block" }}>
-                            <LinkDom
-                                to="/contact"
-                                style={{
-                                    color: "white",
-                                    textDecoration: "none",
-                                }}
-                            >
-                                Contacto
                             </LinkDom>
                         </Typography>
                     </Box>
@@ -233,7 +207,9 @@ export default function NavBar() {
                                             0
                                         )}
                                     </Avatar>
-                                ) : null}
+                                ) : (
+                                    <Avatar>G</Avatar>
+                                )}
                             </IconButton>
                         </Tooltip>
                         <Menu

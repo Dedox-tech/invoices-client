@@ -8,7 +8,6 @@ import Invoices from "./pages/Invoices";
 import InvoiceDetails from "./pages/InvoiceDetails";
 import AddInvoice from "./pages/AddInvoice";
 import EditInvoice from "./pages/EditInvoice";
-import Contact from "./pages/Contact";
 
 export default function App() {
     return (
@@ -45,14 +44,6 @@ export default function App() {
                 element={
                     <EmailPassword.EmailPasswordAuth>
                         <EditInvoice />
-                    </EmailPassword.EmailPasswordAuth>
-                }
-            />
-            <Route
-                path="/contact"
-                element={
-                    <EmailPassword.EmailPasswordAuth>
-                        <Contact />
                     </EmailPassword.EmailPasswordAuth>
                 }
             />
